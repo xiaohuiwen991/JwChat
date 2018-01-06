@@ -30,8 +30,8 @@ var home_index='1';
 <script type="text/javascript" src="js/wap/public.js?ver1"></script>
 <link type="text/css" rel="stylesheet" href="css/wap/web_frame.css??ver1" />
 <link type="text/css" rel="stylesheet" href="css/wap/change_module.css?ver1" />
-<link id="webSkinCss" type="text/css" rel="stylesheet" href="templates/wapother13/css/webskin.css?ver1" />
-<link id="webSkinCss" type="text/css" rel="stylesheet" href="templates/wapother13/skin_13/style.css?ver1" />
+<link type="text/css" rel="stylesheet" href="templates/wapother13/css/webskin.css?ver1" />
+<link type="text/css" rel="stylesheet" href="templates/wapother13/skin_13/style.css?ver1" />
 <!--change_top_tpl-->
 <link type="text/css" rel="stylesheet" href="css/wap/new/index.css?ver1" >
 <!-- <link type="text/css" rel="stylesheet" href="/css/wap/classStyle.css?ver1" > -->
@@ -80,10 +80,11 @@ var home_index='1';
 <body id="webBody" data-curbg="wbg_0"  data-ver = 0>
   <!-- <div class="webBg" id="webSiteBg"></div> -->
 <script>
-  $(function(){
-    var document_h = $(window).height();
-    $("#wrapper").css({"min-height":document_h+'px'});
-   })
+    windows.postAddress = 'http://192.168.1.105/sdsdsd'
+    $(function(){
+        var document_h = $(window).height();
+        $("#wrapper").css({"min-height":document_h+'px'});
+    })
 </script>
 <style type="text/css">
   .mainContainer{overflow: hidden;min-height: 368px;}
@@ -240,64 +241,60 @@ var home_index='1';
                    <td class="MoNameR"></td>
                   </tr>
                   </tbody>
-                </table>
-                                  <span class="MoMore">
-                                    <a   href="#">更多</a>
-                                    </span>
-                              </td>
-              <td class="MoHeadR"></td>
+                </table> <span class="MoMore"><a href="#">更多</a></span>
+                </td>
+                <td class="MoHeadR"></td>
             </tr>
             </tbody>
             </table>
 
             <table class="MoBody"><tbody><tr>
-              <td class="MoBodyL"></td>
-              <td class="MoBodyM">
-                <div class="MoBodyC">
-
-                                    <div class="butgroupModule">
-                                        <ul class="butgroupList q">
-                                            <li id="but_item_2536216" class="butItem  newBbutItem">
-                                                <a   data-height="100" class="itemA" href="#"><span  style="left: 0.49%; top: 29%;"  class="butText" data-left="0.49">公司简介<br>PROFILE</span></a>
-                                            </li>
-                                            <li id="but_item_2536217" class="butItem  newBbutItem">
-                                                <a   data-height="100" class="itemA" href="#"><span class=" yuanImgicon  "   style="left: 0%; top: 0%;"  data-picwidth="315" data-picheight="230" data-left="0">
-                                                    <img src="images/show/report.jpg" width="" height=""></span><span  style="left: 0.55%; top: 29%;"  class="butText" data-left="0.55">报告查询<br>QUERY</span>
-                                                </a>
-                                            </li>
-                                            <li id="but_item_2536229" class="butItem  newBbutItem">
-                                                <a   data-height="100" class="itemA" href="#"><span class=" yuanImgicon  "   style="left: 0%; top: 0%;"  data-picwidth="315" data-picheight="230" data-left="0">
-                                                    <img src="images/show/check.jpg" width="" height=""></span><span  style="left: 0.52%; top: 29%;"  class="butText" data-left="0.52">申请监测<br>APPLCATION</span>
-                                                </a>
-                                            </li>
-                                            <li id="but_item_2536241" class="butItem  newBbutItem">
-                                                <a   data-height="100" class="itemA" href="#"><span  style="left: 0.52%; top: 29%;"  class="butText" data-left="0.52">关于我们<br>ABOUT</span></a>
-                                            </li>
-                                            <li id="but_item_2536242" class="butItem  newBbutItem">
-                                                <a   data-height="100" class="itemA" href="#"><span  style="left: 0.5%; top: 28%;"  class="butText" data-left="0.5">联系我们<br>CONTACT</span></a>
-                                            </li>
-                                            <li id="but_item_2536266" class="butItem  newBbutItem">
-                                                <a   data-height="100" class="itemA" href="#">
-                                                    <span class=" yuanImgicon  "   style="left: 0%; top: 0%;"  data-picwidth="315" data-picheight="230" data-left="0">
-                                                        <img src="images/show/about.png" width="" height="">
-                                                    </span>
-                                                    <span  style="left: 0.55%; top: 28%;"  class="butText" data-left="0.55">企业动态<br>DYNAMIC</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-              </td>
-              <td class="MoBodyR"></td>
+            <td class="MoBodyL"></td>
+            <td class="MoBodyM">
+            <div class="MoBodyC">
+                <div class="butgroupModule">
+                    <ul class="butgroupList q">
+                        <li id="but_item_2536216" class="butItem  newBbutItem">
+                            <a   data-height="100" class="itemA" href="#"><span  style="left: 0.49%; top: 29%;"  class="butText" data-left="0.49">公司简介<br>PROFILE</span></a>
+                        </li>
+                        <li id="but_item_2536217" class="butItem  newBbutItem">
+                            <a   data-height="100" class="itemA" href="#"><span class=" yuanImgicon  "   style="left: 0%; top: 0%;"  data-picwidth="315" data-picheight="230" data-left="0">
+                                <img src="images/show/report.jpg" width="" height=""></span><span  style="left: 0.55%; top: 29%;"  class="butText" data-left="0.55">报告查询<br>QUERY</span>
+                            </a>
+                        </li>
+                        <li id="but_item_2536229" class="butItem  newBbutItem">
+                            <a   data-height="100" class="itemA" href="#"><span class=" yuanImgicon  "   style="left: 0%; top: 0%;"  data-picwidth="315" data-picheight="230" data-left="0">
+                                <img src="images/show/check.jpg" width="" height=""></span><span  style="left: 0.52%; top: 29%;"  class="butText" data-left="0.52">申请监测<br>APPLCATION</span>
+                            </a>
+                        </li>
+                        <li id="but_item_2536241" class="butItem  newBbutItem">
+                            <a   data-height="100" class="itemA" href="#"><span  style="left: 0.52%; top: 29%;"  class="butText" data-left="0.52">企业文化<br>CULTURE</span></a>
+                        </li>
+                        <li id="but_item_2536242" class="butItem  newBbutItem">
+                            <a   data-height="100" class="itemA" href="#"><span  style="left: 0.5%; top: 28%;"  class="butText" data-left="0.5">联系我们<br>CONTACT</span></a>
+                        </li>
+                        <li id="but_item_2536266" class="butItem  newBbutItem">
+                            <a   data-height="100" class="itemA" href="#">
+                                <span class=" yuanImgicon  "   style="left: 0%; top: 0%;"  data-picwidth="315" data-picheight="230" data-left="0">
+                                    <img src="images/show/about.png" width="" height="">
+                                </span>
+                                <span  style="left: 0.55%; top: 28%;"  class="butText" data-left="0.55">企业动态<br>DYNAMIC</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </td>
+            <td class="MoBodyR"></td>
             </tr></tbody></table>
 
             <table class="MoB"><tbody><tr>
-              <td class="MoBL"></td>
-              <td class="MoBM"></td>
-              <td class="MoBR"></td>
+            <td class="MoBL"></td>
+            <td class="MoBM"></td>
+            <td class="MoBR"></td>
             </tr></tbody></table>
             </div>
-                </div>
+            </div>
       </div>
            
   </div>
@@ -314,7 +311,7 @@ var home_index='1';
     <div class="toolMenu" id="tool_menu" >
       <menu class="toolBut q">
             <li id="toolHome" sorts="9" style=" width:20%;">
-                <a id="index_link" href="lanrenmb/wap_doc/style4.html"  >
+                <a id="index_link1" href="lanrenmb/wap_doc/style4.html"  >
                     <b class="icon" id="icon_960813">
                         <img src="images/wap/toolHome_icon.png" />
                     </b>
@@ -416,6 +413,12 @@ $("#but_item_2536216").click(function(){
     window.location.href="view/company.html"
 }),$("#but_item_2536217").click(function(){
     window.location.href="view/login.htm"
+}),$("#but_item_2536241").click(function(){
+    window.location.href="view/profile.html"
+}),$("#but_item_2536242").click(function(){
+    window.location.href="view/contact.html"
+}),$("#but_item_2536266").click(function(){
+    window.location.href="view/dynamic.html"
 })
 //判断是否为微信
 function is_weixn(){

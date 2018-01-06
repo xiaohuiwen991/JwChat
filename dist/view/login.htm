@@ -1,138 +1,93 @@
-
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <meta charset="UTF-8">
 <head>
     <title>用户登录</title>
     <link rel="icon" href="javascript:void(0)/favicon.ico" type="image/icon"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
     <link rel="stylesheet" href="../css/common.css"/>
-    
 
 <script src="../js/require.2.1.9-jquery.2.0.3-underscore.1.5.2-backbone.1.0.0.js"></script>
 <script src="../js/mobile.js"></script>
-<script>
-	var device = (function () {
-		var a;
-		return function () {
-			if (a) {
-				return a;
-			}
-			a = {};
-			var b = {isIPAD: "ipad", isIPHONE: "iphone", isIPOD: "ipod", isAndroid: "android"}, c;
-			var ua = navigator.userAgent.toLowerCase();
-			for (c in b) {
-				a[c] = -1 !== ua.indexOf(b[c]) ? true : false;
-			}
-			a.isIOS = a.isIPAD || a.isIPHONE || a.isIPOD;
-			return a;
-		}
-	})();
+<style type="text/css">
+    .geetest {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-	//建立ios与native通信桥梁
-	var ios_webview_bridge;
-	document.addEventListener('WebViewJavascriptBridgeReady', function onBridgeReady(event) {
-		ios_webview_bridge = event.bridge;
-		ios_webview_bridge.init(function (message, responseCallback) {
-			responseCallback(message);
-		});
-	}, false);
-	function iosSendMessage(data, callback) {
-		try {
-			if (!ios_webview_bridge) {
-				setTimeout(function () {
-					iosSendMessage(data, callback);
-				}, 40);
-				return false;
-			}
-			ios_webview_bridge.send(data, function responseCallback(responseData) {
-				callback && callback(responseData);
-			});
-		} catch (e) {}
-	}
-</script>
+    .gt_bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: gray;
+        opacity: 0.7;
+    }
 
-    <style type="text/css">
-        .geetest {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-        }
+    .geetest .gt_wrap {
+        width: 300px;
+        margin: 10px auto;
+        text-align: center;
+        background-color: #fff;
+        z-index: 2;
+        position: relative;
+    }
 
-        .gt_bg {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: gray;
-            opacity: 0.7;
-        }
+    .gt_wrapper {
+        margin: 0 auto;
+    }
 
-        .geetest .gt_wrap {
-            width: 300px;
-            margin: 10px auto;
-            text-align: center;
-            background-color: #fff;
-            z-index: 2;
-            position: relative;
-        }
+    .geetest .gt_wrap .gt_top {
+        padding: 0 8px;
+        height: 44px;
+        z-index: 1;
+        position: relative;
+        text-align: center;
+        font-weight: 500;
+    }
 
-        .gt_wrapper {
-            margin: 0 auto;
-        }
+    .geetest .gt_wrap .title {
+        line-height: 45px;
+        width: 200px;
+        margin: 0 auto;
+    }
 
-        .geetest .gt_wrap .gt_top {
-            padding: 0 8px;
-            height: 44px;
-            z-index: 1;
-            position: relative;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .geetest .gt_wrap .title {
-            line-height: 45px;
-            width: 200px;
-            margin: 0 auto;
-        }
-
-        .goback {
-            position: absolute;
-            left: .5rem;
-            color: #fff;
-            font-size: 1rem;
-        }
-    </style>
+    .goback {
+        position: absolute;
+        left: .5rem;
+        color: #fff;
+        font-size: 1rem;
+    }
+</style>
 </head>
 <body>
 <div class="m_wrap">
     <div class="m_header">
-        <a href="javascript:void(0)http://m.yinyuetai.com/" class="goback">返回</a>
+        <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
         
         账号登录
         <a class="m_header_refresh J_refresh" href="javascript:void(0)javascript:;"></a></div>
-    <form id="login-form" name="pop-form-login" method="post" action="http://login.yinyuetai.com/m/login-ajax">
-        
+    <form id="login-form" name="pop-form-login">
         <input type="hidden" name="appkey" value="">
 
         <div>
             <span class="m_label">使用手机号码登录：</span>
         </div>
         <div class="mr_b15 m_input_wrap width90">
-            <input class="m_input m_name" type="text" autocomplete="on" placeholder="请输入邮箱或手机号码" name="email">
-            <a href="javascript:void(0)javascript:;" class="J_input_reset m_reset_btn"></a>
+            <input class="m_input m_name" type="text" id="email-input" autocomplete="on" placeholder="请输入邮箱或手机号码" name="email">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn m_reset_email"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_input m_pwd J_pwd" type="password" placeholder="请输入登录密码">
-            <a href="javascript:void(0)javascript:;" class="J_input_reset m_reset_btn"></a>
+            <input class="m_input m_pwd J_pwd" id="password-input" type="password" placeholder="请输入登录密码">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn m_reset_password"></a>
         </div>
         <div class="geetest">
             <div class="gt_bg"></div>
@@ -148,7 +103,7 @@
             </div>
         </div>
         <div class="mr_b15">
-            <input class="m_button m_submit" type="submit" hidefocus="" value="登录">
+            <input class="m_button m_submit" readonly="readonly" value="登录">
         </div>
         <div class="mr_b15">
             <a class="m_button m_button_plain" href="register.htm">注册</a>
@@ -163,6 +118,45 @@
         </div>
 </div>
 <script type="text/javascript">
+    var device = (function () {
+        var a;
+        return function () {
+            if (a) {
+                return a;
+            }
+            a = {};
+            var b = {isIPAD: "ipad", isIPHONE: "iphone", isIPOD: "ipod", isAndroid: "android"}, c;
+            var ua = navigator.userAgent.toLowerCase();
+            for (c in b) {
+                a[c] = -1 !== ua.indexOf(b[c]) ? true : false;
+            }
+            a.isIOS = a.isIPAD || a.isIPHONE || a.isIPOD;
+            return a;
+        }
+    })();
+
+    //建立ios与native通信桥梁
+    var ios_webview_bridge;
+    document.addEventListener('WebViewJavascriptBridgeReady', function onBridgeReady(event) {
+        ios_webview_bridge = event.bridge;
+        ios_webview_bridge.init(function (message, responseCallback) {
+            responseCallback(message);
+        });
+    }, false);
+    function iosSendMessage(data, callback) {
+        try {
+            if (!ios_webview_bridge) {
+                setTimeout(function () {
+                    iosSendMessage(data, callback);
+                }, 40);
+                return false;
+            }
+            ios_webview_bridge.send(data, function responseCallback(responseData) {
+                callback && callback(responseData);
+            });
+        } catch (e) {}
+    }
+
     var appKey = '';
     var isStageAPP = false;
 
@@ -176,10 +170,30 @@
         }
     });
 
-
-    require(['app/mobile/login/login'], function (Login) {
-        Login.login.init('http://m.yinyuetai.com/');
+    $('.m_reset_email').click(function(){
+        $('#email-input').val('');
+    }),$('.m_reset_password').click(function(){
+        $('#password-input').val('');
+    }),$('.m_submit').click(function(){
+        var address = windows.postAddress;
+        console.log(f)
+//        $.ajax({
+//            type: "post",
+//            dataType: "json",
+//            url: "http://",
+//            success: function (msg) {
+//                var str = "";
+//                for (i in msg) {
+//                    str += "<tr><td>" + msg[i].id + "</td><td>" + msg[i].name + "</td><td>" + msg[i].cla + "</td><td>" + msg[i].sex + "</td><td>" + msg[i].tel + "</td></tr>";
+//                }
+//                $("tbody").append(str);
+//            }
+//        });
     });
+
+//    require(['app/mobile/login/login'], function (Login) {
+//        Login.login.init('http://m.yinyuetai.com/');
+//    });
 </script>
 <script type="text/javascript"> 
      /*创建于2016-06-14*/ 

@@ -80,7 +80,6 @@ var home_index='1';
 <body id="webBody" data-curbg="wbg_0"  data-ver = 0>
   <!-- <div class="webBg" id="webSiteBg"></div> -->
 <script>
-    windows.postAddress = 'http://192.168.1.105/sdsdsd'
     $(function(){
         var document_h = $(window).height();
         $("#wrapper").css({"min-height":document_h+'px'});
@@ -170,37 +169,39 @@ var home_index='1';
                                                 <div class="bannerNav"></div>
                                             </div>
 <script language="javascript">
-				$(function() {
-					aGlobalBannerHeight.m584634 = parseInt(115);
-					setBannerModuleHeight584634();
-					$(window).resize(function(){
-						//setTimeout(function(){
-						setBannerModuleHeight584634();
-						//},500);
-					})
-				});
+    window.test;
+    window.test = 'http://21dasdasdasdas';
+    $(function() {
+        aGlobalBannerHeight.m584634 = parseInt(115);
+        setBannerModuleHeight584634();
+        $(window).resize(function(){
+            //setTimeout(function(){
+            setBannerModuleHeight584634();
+            //},500);
+        })
+    });
 
-				function setBannerModuleHeight584634() {
-					var Banner = $("#move_module_584634"),
-					oBanner = $("#move_module_584634 .movePicShow"),
-					iPicMaxWidth = 640,
-					// iWindowWidth = $(window).width();
-					iWindowWidth = Banner.parent().width();
+    function setBannerModuleHeight584634() {
+        var Banner = $("#move_module_584634"),
+        oBanner = $("#move_module_584634 .movePicShow"),
+        iPicMaxWidth = 640,
+        // iWindowWidth = $(window).width();
+        iWindowWidth = Banner.parent().width();
 
-					if (iWindowWidth > iPicMaxWidth) {
-					var iRealityHeight = aGlobalBannerHeight.m584634*2;
-					var iRealityWidth = iPicMaxWidth;
-					} else if (iWindowWidth > 0) {
-					iBfbWidth = (iWindowWidth / iPicMaxWidth).toFixed(2);
-					var iRealityHeight = parseInt(aGlobalBannerHeight.m584634 * iBfbWidth) * 2;
-					var iRealityWidth = iWindowWidth;
-					}
-					oBanner.height(iRealityHeight);
-					oBanner.find('li').height(iRealityHeight);
-					Banner.width(iRealityWidth);
-					Banner.find('li').width(iRealityWidth);
-				}
-				</script>
+        if (iWindowWidth > iPicMaxWidth) {
+        var iRealityHeight = aGlobalBannerHeight.m584634*2;
+        var iRealityWidth = iPicMaxWidth;
+        } else if (iWindowWidth > 0) {
+        iBfbWidth = (iWindowWidth / iPicMaxWidth).toFixed(2);
+        var iRealityHeight = parseInt(aGlobalBannerHeight.m584634 * iBfbWidth) * 2;
+        var iRealityWidth = iWindowWidth;
+        }
+        oBanner.height(iRealityHeight);
+        oBanner.find('li').height(iRealityHeight);
+        Banner.width(iRealityWidth);
+        Banner.find('li').width(iRealityWidth);
+    }
+</script>
                                 </div>
               </td>
               <td class="MoBodyR"></td>

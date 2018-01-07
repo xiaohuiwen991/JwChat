@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../css/common.css"/>
 
 <script src="../js/require.2.1.9-jquery.2.0.3-underscore.1.5.2-backbone.1.0.0.js"></script>
-<script src="../js/mobile.js"></script>
 <style type="text/css">
     .geetest {
         display: none;
@@ -66,58 +65,61 @@
         color: #fff;
         font-size: 1rem;
     }
+
+    input.check::-webkit-input-placeholder {
+        /* placeholder颜色  */
+        color: red;
+    }
 </style>
 </head>
 <body>
-<div class="m_wrap">
-    <div class="m_header">
-        <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
-        
-        账号登录
-        <a class="m_header_refresh J_refresh" href="javascript:void(0)javascript:;"></a></div>
-    <form id="login-form" name="pop-form-login">
-        <input type="hidden" name="appkey" value="">
+    <div class="m_wrap">
+        <div class="m_header">
+            <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
+            账号登录<a class="m_header_refresh J_refresh" href="javascript:void(0);"></a>
+        </div>
+        <form id="login-form" name="pop-form-login">
+            <div>
+                <span class="m_label">使用手机号码登录：</span>
+            </div>
+            <div class="mr_b15 m_input_wrap width90">
+                <input class="m_input m_name" type="text" id="email-input" autocomplete="on" placeholder="请输入邮箱或手机号码" name="email">
+                <a href="javascript:void(0);" class="J_input_reset m_reset_btn m_reset_email"></a>
+            </div>
+            <div class="mr_b25 m_input_wrap width90">
+                <input class="m_input m_pwd J_pwd" id="password-input" type="password" placeholder="请输入登录密码" name="password">
+                <a href="javascript:void(0);" class="J_input_reset m_reset_btn m_reset_password"></a>
+            </div>
+            <div class="geetest">
+                <div class="gt_bg"></div>
+                <div class="gt_wrap">
+                    <div class="gt_top">
+                        <a class="gt_exit" id="gt_close" href="javascript:void(0);"></a>
 
-        <div>
-            <span class="m_label">使用手机号码登录：</span>
-        </div>
-        <div class="mr_b15 m_input_wrap width90">
-            <input class="m_input m_name" type="text" id="email-input" autocomplete="on" placeholder="请输入邮箱或手机号码" name="email">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn m_reset_email"></a>
-        </div>
-        <div class="mr_b25 m_input_wrap width90">
-            <input class="m_input m_pwd J_pwd" id="password-input" type="password" placeholder="请输入登录密码">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn m_reset_password"></a>
-        </div>
-        <div class="geetest">
-            <div class="gt_bg"></div>
-            <div class="gt_wrap">
-                <div class="gt_top">
-                    <a class="gt_exit" id="gt_close" href="javascript:void(0)javascript:;"></a>
-
-                    <div class="title">请拖动按钮通过验证</div>
+                        <div class="title">请拖动按钮通过验证</div>
+                    </div>
+                    <script type="text/javascript" src="http://api.geetest.com/get.php?gt=f43ff6668a26e10f745d87e1a7b5e731&width=300" async></script>
                 </div>
-                <script type="text/javascript"
-                        src="http://api.geetest.com/get.php?gt=f43ff6668a26e10f745d87e1a7b5e731&width=300"
-                        async></script>
+            </div>
+            <div class="mr_b15">
+                <input class="m_button m_submit" readonly="readonly" value="登录">
+            </div>
+            <div class="mr_b15">
+                <a class="m_button m_button_plain" href="register.htm">注册</a>
+            </div>
+            <div class="width90">
+                <a class="findpw" href="javascript:void(0)/forgetpw">找回密码</a>
+            </div>
+        </form>
+        <div class="external">
+            <div class="ex-wrap ex-title">
+                <span>其他登录方式</span>
             </div>
         </div>
-        <div class="mr_b15">
-            <input class="m_button m_submit" readonly="readonly" value="登录">
-        </div>
-        <div class="mr_b15">
-            <a class="m_button m_button_plain" href="register.htm">注册</a>
-        </div>
-        <div class="width90">
-            <a class="findpw" href="javascript:void(0)/forgetpw">找回密码</a>
-        </div>
-    </form>
-    <div class="external">
-        <div class="ex-wrap ex-title">
-            <span>其他登录方式</span>
-        </div>
-</div>
+    </div>
+</body>
 <script type="text/javascript">
+
     var device = (function () {
         var a;
         return function () {
@@ -157,6 +159,14 @@
         } catch (e) {}
     }
 
+    function clear(){
+        document.getElementById('email-input').value = '';
+        document.getElementById('password-input').value = '';
+    }
+
+    clear();
+
+    var address = window.postAddress;
     var appKey = '';
     var isStageAPP = false;
 
@@ -175,29 +185,36 @@
     }),$('.m_reset_password').click(function(){
         $('#password-input').val('');
     }),$('.m_submit').click(function(){
-        var address = windows.postAddress;
-        console.log(f)
-//        $.ajax({
-//            type: "post",
-//            dataType: "json",
-//            url: "http://",
-//            success: function (msg) {
-//                var str = "";
-//                for (i in msg) {
-//                    str += "<tr><td>" + msg[i].id + "</td><td>" + msg[i].name + "</td><td>" + msg[i].cla + "</td><td>" + msg[i].sex + "</td><td>" + msg[i].tel + "</td></tr>";
-//                }
-//                $("tbody").append(str);
-//            }
-//        });
+        var email = $('#email-input').val().trim();
+        var password = $('#password-input').val().trim();
+        if(email==''||email==null){
+            check('email-input');
+        }
+        if(password==''||password==null){
+            check('password-input');
+        }
+        console.log($('#login-form').serialize())
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "http://192.165.1.1/wechat",
+            data:$('#login-form').serialize(),
+            success: function (msg) {
+                var str = "";
+            }
+        });
     });
 
-//    require(['app/mobile/login/login'], function (Login) {
-//        Login.login.init('http://m.yinyuetai.com/');
-//    });
+    function check(id){
+        var text=document.getElementById(id).value;
+        if(text.trim()==''||text.trim()==null){
+            document.getElementById(id).value = '';
+            $('#'+id).addClass('check');
+        }
+    }
+    var cpro_id = "u2671677";
+    //    require(['app/mobile/login/login'], function (Login) {
+    //        Login.login.init('http://m.yinyuetai.com/');
+    //    });
 </script>
-<script type="text/javascript"> 
-     /*创建于2016-06-14*/ 
-     var cpro_id = "u2671677";
-</script>
-</body>
 </html>

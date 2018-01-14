@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<meta charset="UTF-8">
+<head>
+    <title>注册成功</title>
+    <link rel="icon" href="javascript:void(0)/favicon.ico" type="image/icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="../css/common.css"/>
+    <script src="../js/require.2.1.9-jquery.2.0.3-underscore.1.5.2-backbone.1.0.0.js"></script>
+    <style type="text/css">
+        .geetest {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gt_bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            opacity: 0.7;
+        }
+
+        .geetest .gt_wrap {
+            width: 300px;
+            margin: 10px auto;
+            text-align: center;
+            background-color: #fff;
+            z-index: 2;
+            position: relative;
+        }
+
+        .gt_wrapper {
+            margin: 0 auto;
+        }
+
+        .geetest .gt_wrap .gt_top {
+            padding: 0 8px;
+            height: 44px;
+            z-index: 1;
+            position: relative;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .geetest .gt_wrap .title {
+            line-height: 45px;
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        .goback {
+            position: absolute;
+            left: .5rem;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        input.check::-webkit-input-placeholder {
+            /* placeholder颜色  */
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="m_wrap">
+    <div class="m_header">
+        <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
+        注册成功
+        <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a></div>
+    <br/>
+    <br/>
+    <form id="login-form" name="pop-form-login" >
+        注册成功！工作人员会在1~2个工作日内审核您的账号信息
+        <div class="mr_b15">
+            <input class="m_button m_submit" readonly="readonly" value="返回">
+        </div>
+    </form>
+    <div class="external">
+        <div class="ex-wrap ex-href">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var device = (function () {
+        var a;
+        return function () {
+            if (a) {
+                return a;
+            }
+            a = {};
+            var b = {isIPAD: "ipad", isIPHONE: "iphone", isIPOD: "ipod", isAndroid: "android"}, c;
+            var ua = navigator.userAgent.toLowerCase();
+            for (c in b) {
+                a[c] = -1 !== ua.indexOf(b[c]) ? true : false;
+            }
+            a.isIOS = a.isIPAD || a.isIPHONE || a.isIPOD;
+            return a;
+        }
+    })();
+
+    //建立ios与native通信桥梁
+    var ios_webview_bridge;
+    document.addEventListener('WebViewJavascriptBridgeReady', function onBridgeReady(event) {
+        ios_webview_bridge = event.bridge;
+        ios_webview_bridge.init(function (message, responseCallback) {
+            responseCallback(message);
+        });
+    }, false);
+    function iosSendMessage(data, callback) {
+        try {
+            if (!ios_webview_bridge) {
+                setTimeout(function () {
+                    iosSendMessage(data, callback);
+                }, 40);
+                return false;
+            }
+            ios_webview_bridge.send(data, function responseCallback(responseData) {
+                callback && callback(responseData);
+            });
+        } catch (e) {}
+    }
+
+    var appKey = '';
+    var isStageAPP = false;
+
+    if (appKey == '10211') {
+        isStageAPP = true;
+    }
+
+    var referrer = '';
+    $('.m_reset_btn').click(function(){
+        var id = this.getAttribute('param');
+        document.getElementById(id).value = '';
+    }),$('.m_submit').click(function(){
+        var email = $('#email_input').val().trim();
+        var password1 = $('#password1_input').val().trim();
+        var password2 = $('#password2_input').val().trim();
+        var querstion1 = $('#querstion1_input').val().trim();
+        var ansower1 = $('#ansower1_input').val().trim();
+        var querstion2 = $('#querstion2_input').val().trim();
+        var ansower2 = $('#ansower2_input').val().trim();
+
+        if(email==''||email==null){
+            check('email_input');
+        }
+        if(password1==''||password1==null){
+            check('password1_input');
+        }
+        if(password2==''||password2==null){
+            check('password2_input');
+        }
+        if(querstion1==''||querstion1==null){
+            check('querstion1_input');
+        }
+        if(ansower1==''||ansower1==null){
+            check('ansower1_input');
+        }
+        if(querstion2==''||querstion2==null){
+            check('querstion2_input');
+        }
+        if(ansower2==''||ansower2==null){
+            check('ansower2_input');
+        }
+        console.log($('#login-form').serialize())
+//        $.ajax({
+//            type: "post",
+//            dataType: "json",
+//            url: "http://192.165.1.1/wechat",
+//            data:$('#login-form').serialize(),
+//            success: function (msg) {
+//                var str = "";
+//            }
+//        });
+        window.location.href = "userdata.htm";
+    });
+
+    function check(id){
+        var text=document.getElementById(id).value;
+        if(text.trim()==''||text.trim()==null){
+            document.getElementById(id).value = '';
+            $('#'+id).addClass('check');
+        }
+    }
+
+    var cpro_id = "u2671677";
+    $(document).ready(function () {
+        if (referrer) {
+            $('.goback').attr('href', referrer);
+        }
+    });
+</script>
+</body>
+</html>

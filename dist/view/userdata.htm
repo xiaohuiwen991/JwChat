@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<meta charset="UTF-8">
+<head>
+    <title>用户详细资料</title>
+    <link rel="icon" href="javascript:void(0)/favicon.ico" type="image/icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="../css/common.css"/>
+    <script src="../js/require.2.1.9-jquery.2.0.3-underscore.1.5.2-backbone.1.0.0.js"></script>
+    <style type="text/css">
+        .geetest {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gt_bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            opacity: 0.7;
+        }
+
+        .geetest .gt_wrap {
+            width: 300px;
+            margin: 10px auto;
+            text-align: center;
+            background-color: #fff;
+            z-index: 2;
+            position: relative;
+        }
+
+        .gt_wrapper {
+            margin: 0 auto;
+        }
+
+        .geetest .gt_wrap .gt_top {
+            padding: 0 8px;
+            height: 44px;
+            z-index: 1;
+            position: relative;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .geetest .gt_wrap .title {
+            line-height: 45px;
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        .goback {
+            position: absolute;
+            left: .5rem;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        input.check::-webkit-input-placeholder {
+            /* placeholder颜色  */
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="m_wrap">
+    <div class="m_header">
+        <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
+        用户详细资料
+        <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a></div>
+    <br/>
+    <br/>
+    <form id="login-form" name="pop-form-login" >
+
+        <input type="hidden" name="appkey" value="">
+
+        <div class="mr_b15 m_input_wrap width90">
+            <input class="m_input m_name" type="text" id="company_input" autocomplete="on" placeholder="请输入您的公司名称" name="company">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="company_input"></a>
+        </div>
+        <div class="mr_b25 m_input_wrap width90">
+            <input class="m_name m_input" id="credit_input" type="text" placeholder="请输入您的企业信用识别代码" name="credit">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="credit_input"></a>
+        </div>
+        <div class="mr_b25 m_input_wrap width90">
+            <input class="m_name m_input" id="contact_input" type="text" placeholder="请输入您的联系方式" name="contact">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="contact_input"></a>
+        </div>
+        <div class="mr_b25 m_input_wrap width90">
+            <input class="m_name m_input" id="report_input" type="text" placeholder="请输入您的寄送报告地址" name="report">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="report_input"></a>
+        </div>
+        <div class="mr_b25 m_input_wrap width90">
+            <input class="m_name m_input" id="bills_input" type="text" placeholder="请输入您的寄送发票地址" name="bills">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="bills_input"></a>
+        </div>
+        <div class="mr_b25 m_input_wrap width90">
+            <input class="m_name m_input" id="email_input" type="text" placeholder="请输入您的邮箱地址" name="email">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="email_input"></a>
+        </div>
+        <div class="geetest">
+            <div class="gt_bg"></div>
+            <div class="gt_wrap">
+                <div class="gt_top">
+                    <a class="gt_exit" id="gt_close" href="javascript:void(0);"></a>
+
+                    <div class="title">请拖动按钮通过验证</div>
+                </div>
+                <script type="text/javascript" src="http://api.geetest.com/get.php?gt=f43ff6668a26e10f745d87e1a7b5e731&width=300" async></script>
+            </div>
+        </div>
+        <div class="mr_b15">
+            <input class="m_button m_submit" readonly="readonly" value="提交">
+        </div>
+    </form>
+    <div class="external">
+        <div class="ex-wrap ex-href">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var device = (function () {
+        var a;
+        return function () {
+            if (a) {
+                return a;
+            }
+            a = {};
+            var b = {isIPAD: "ipad", isIPHONE: "iphone", isIPOD: "ipod", isAndroid: "android"}, c;
+            var ua = navigator.userAgent.toLowerCase();
+            for (c in b) {
+                a[c] = -1 !== ua.indexOf(b[c]) ? true : false;
+            }
+            a.isIOS = a.isIPAD || a.isIPHONE || a.isIPOD;
+            return a;
+        }
+    })();
+
+    //建立ios与native通信桥梁
+    var ios_webview_bridge;
+    document.addEventListener('WebViewJavascriptBridgeReady', function onBridgeReady(event) {
+        ios_webview_bridge = event.bridge;
+        ios_webview_bridge.init(function (message, responseCallback) {
+            responseCallback(message);
+        });
+    }, false);
+    function iosSendMessage(data, callback) {
+        try {
+            if (!ios_webview_bridge) {
+                setTimeout(function () {
+                    iosSendMessage(data, callback);
+                }, 40);
+                return false;
+            }
+            ios_webview_bridge.send(data, function responseCallback(responseData) {
+                callback && callback(responseData);
+            });
+        } catch (e) {}
+    }
+
+    var appKey = '';
+    var isStageAPP = false;
+
+    if (appKey == '10211') {
+        isStageAPP = true;
+    }
+
+    var isTrue = false;
+    var referrer = '';
+    $('.m_reset_btn').click(function(){
+        var id = this.getAttribute('param');
+        document.getElementById(id).value = '';
+    }),$('.m_submit').click(function(){
+        var company = $('#company_input').val().trim();
+        var credit = $('#credit_input').val().trim();
+        var contact = $('#contact_input').val().trim();
+        var report = $('#report_input').val().trim();
+        var bills = $('#bills_input').val().trim();
+        var email = $('#email_input').val().trim();
+        isTrue = false;
+        if(company==''||company==null){
+            check('company_input');
+        }
+        if(credit==''||credit==null){
+            check('credit_input');
+        }
+        if(contact==''||contact==null){
+            check('contact_input');
+        }
+        if(report==''||report==null){
+            check('report_input');
+        }
+        if(bills==''||bills==null){
+            check('bills_input');
+        }
+        if(email==''||email==null){
+            check('email_input');
+        }
+        if(isTrue) return;
+        console.log($('#login-form').serialize())
+//        $.ajax({
+//            type: "post",
+//            dataType: "json",
+//            url: "http://192.165.1.1/wechat",
+//            data:$('#login-form').serialize(),
+//            success: function (msg) {
+//                var str = "";
+//            }
+//        });
+        window.location.href = "success.htm";
+    });
+
+    function check(id){
+        var text=document.getElementById(id).value;
+        if(text.trim()==''||text.trim()==null){
+            document.getElementById(id).value = '';
+            $('#'+id).addClass('check');
+            return;
+        }
+    }
+
+    var cpro_id = "u2671677";
+    $(document).ready(function () {
+        if (referrer) {
+            $('.goback').attr('href', referrer);
+        }
+    });
+</script>
+</body>
+</html>

@@ -76,7 +76,7 @@
 <div class="m_wrap">
     <div class="m_header">
         <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
-        账号注册
+        用户注册
         <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a></div>
     <br/>
     <br/>
@@ -179,6 +179,7 @@
         isStageAPP = true;
     }
 
+    var isTrue = false;
     var referrer = '';
     $('.m_reset_btn').click(function(){
         var id = this.getAttribute('param');
@@ -191,7 +192,7 @@
         var ansower1 = $('#ansower1_input').val().trim();
         var querstion2 = $('#querstion2_input').val().trim();
         var ansower2 = $('#ansower2_input').val().trim();
-
+        isTrue = false;
         if(email==''||email==null){
             check('email_input');
         }
@@ -213,16 +214,18 @@
         if(ansower2==''||ansower2==null){
             check('ansower2_input');
         }
+//        if(isTrue) return;
         console.log($('#login-form').serialize())
-        $.ajax({
-            type: "post",
-            dataType: "json",
-            url: "http://192.165.1.1/wechat",
-            data:$('#login-form').serialize(),
-            success: function (msg) {
-                var str = "";
-            }
-        });
+//        $.ajax({
+//            type: "post",
+//            dataType: "json",
+//            url: "http://192.165.1.1/wechat",
+//            data:$('#login-form').serialize(),
+//            success: function (msg) {
+//                var str = "";
+//            }
+//        });
+        window.location.href = "userdata.htm";
     });
 
     function check(id){
@@ -230,6 +233,7 @@
         if(text.trim()==''||text.trim()==null){
             document.getElementById(id).value = '';
             $('#'+id).addClass('check');
+            isTrue = true;
         }
     }
 

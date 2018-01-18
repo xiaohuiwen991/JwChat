@@ -81,7 +81,7 @@
     <br/>
     <br/>
     <form id="login-form" name="pop-form-login" >
-        注册成功！工作人员会在1~2个工作日内审核您的账号信息
+        注册成功！工作人员会在1~2个工作日内审核您的账号信息<br/><br/><br/><br/>
         <div class="mr_b15">
             <input class="m_button m_submit" readonly="readonly" value="返回">
         </div>
@@ -143,46 +143,7 @@
         var id = this.getAttribute('param');
         document.getElementById(id).value = '';
     }),$('.m_submit').click(function(){
-        var email = $('#email_input').val().trim();
-        var password1 = $('#password1_input').val().trim();
-        var password2 = $('#password2_input').val().trim();
-        var querstion1 = $('#querstion1_input').val().trim();
-        var ansower1 = $('#ansower1_input').val().trim();
-        var querstion2 = $('#querstion2_input').val().trim();
-        var ansower2 = $('#ansower2_input').val().trim();
-
-        if(email==''||email==null){
-            check('email_input');
-        }
-        if(password1==''||password1==null){
-            check('password1_input');
-        }
-        if(password2==''||password2==null){
-            check('password2_input');
-        }
-        if(querstion1==''||querstion1==null){
-            check('querstion1_input');
-        }
-        if(ansower1==''||ansower1==null){
-            check('ansower1_input');
-        }
-        if(querstion2==''||querstion2==null){
-            check('querstion2_input');
-        }
-        if(ansower2==''||ansower2==null){
-            check('ansower2_input');
-        }
-        console.log($('#login-form').serialize())
-//        $.ajax({
-//            type: "post",
-//            dataType: "json",
-//            url: "http://192.165.1.1/wechat",
-//            data:$('#login-form').serialize(),
-//            success: function (msg) {
-//                var str = "";
-//            }
-//        });
-        window.location.href = "userdata.htm";
+        window.location.href = "../wap_jypx6.html";
     });
 
     function check(id){

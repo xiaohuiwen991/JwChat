@@ -85,24 +85,28 @@
         <input type="hidden" name="appkey" value="">
 
         <div class="mr_b15 m_input_wrap width90">
-            <input class="m_input m_name" type="text" id="company_input" autocomplete="on" placeholder="请输入您的公司名称" name="company">
+            <input class="m_input m_name" type="text" id="name_input" autocomplete="on" placeholder="请输入您的姓名" name="trueName">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="name_input"></a>
+        </div>
+        <div class="mr_b15 m_input_wrap width90">
+            <input class="m_input m_name" type="text" id="company_input" autocomplete="on" placeholder="请输入您的公司名称" name="companyName">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="company_input"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="credit_input" type="text" placeholder="请输入您的企业信用识别代码" name="credit">
+            <input class="m_name m_input" id="credit_input" type="text" placeholder="请输入您的企业信用识别代码" name="companyCode">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="credit_input"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="contact_input" type="text" placeholder="请输入您的联系方式" name="contact">
+            <input class="m_name m_input" id="contact_input" type="text" placeholder="请输入您的联系方式" name="telphone">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="contact_input"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="report_input" type="text" placeholder="请输入您的寄送报告地址" name="report">
+            <input class="m_name m_input" id="report_input" type="text" placeholder="请输入您的寄送报告地址" name="reportAdress">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="report_input"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="bills_input" type="text" placeholder="请输入您的寄送发票地址" name="bills">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="bills_input"></a>
+            <input class="m_name m_input" id="invoice_input" type="text" placeholder="请输入您的寄送发票地址" name="invoiceAdress">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="invoice_input"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
             <input class="m_name m_input" id="email_input" type="text" placeholder="请输入您的邮箱地址" name="email">
@@ -181,13 +185,17 @@
         var id = this.getAttribute('param');
         document.getElementById(id).value = '';
     }),$('.m_submit').click(function(){
+        var name = $('#name_input').val().trim();
         var company = $('#company_input').val().trim();
         var credit = $('#credit_input').val().trim();
         var contact = $('#contact_input').val().trim();
         var report = $('#report_input').val().trim();
-        var bills = $('#bills_input').val().trim();
+        var invoice = $('#invoice_input').val().trim();
         var email = $('#email_input').val().trim();
         isTrue = false;
+        if(name==''||name==null){
+            check('name_input');
+        }
         if(company==''||company==null){
             check('company_input');
         }
@@ -200,24 +208,30 @@
         if(report==''||report==null){
             check('report_input');
         }
-        if(bills==''||bills==null){
-            check('bills_input');
+        if(invoice==''||invoice==null){
+            check('invoice_input');
         }
         if(email==''||email==null){
             check('email_input');
         }
         if(isTrue) return;
-        console.log($('#login-form').serialize())
-//        $.ajax({
-//            type: "post",
-//            dataType: "json",
-//            url: "http://192.165.1.1/wechat",
-//            data:$('#login-form').serialize(),
-//            success: function (msg) {
-//                var str = "";
-//            }
-//        });
-        window.location.href = "success.htm";
+
+        var data = $('#login-form').serialize();
+        var data2 = window.localStorage.getItem("register");
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "http://127.0.0.1:8040/WeChat/wx/business/WeChart/register",
+            data:data+'&'+data2,
+            success: function (msg) {
+                if(msg.data==null || msg.data==0) {
+                    window.location.href = "success.htm";
+                }else{
+                    window.location.href = "error.htm";
+                }
+            }
+        });
+
     });
 
     function check(id){
@@ -225,7 +239,7 @@
         if(text.trim()==''||text.trim()==null){
             document.getElementById(id).value = '';
             $('#'+id).addClass('check');
-            return;
+            isTrue = true;
         }
     }
 

@@ -70,6 +70,11 @@
         /* placeholder颜色  */
         color: red;
     }
+
+    p.error {
+        margin-left: 30px;
+        color: red;
+    }
 </style>
 </head>
 <body>
@@ -84,33 +89,35 @@
         
         <input type="hidden" name="appkey" value="">
 
-        <div class="mr_b15 m_input_wrap width90">
-            <input class="m_input m_name" type="text" id="email_input" autocomplete="on" placeholder="请输入邮箱或手机号码" name="email">
+        <div class="mr_b25 m_input_wrap width90">
+            <input class="m_input m_name" type="text" id="email_input" autocomplete="on" placeholder="请输入邮箱或手机号码" name="userName">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="email_input"></a>
+            <p class="error hide" id="errorMessage"><font>账号已经存在请重新输入!</font></p>
         </div>
         <div class="mr_b25 m_input_wrap width90">
             <input class="m_input m_pwd J_pwd" id="password1_input" type="password" placeholder="请输入登录密码" name="password1">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="password1_input"></a>
         </div>
-        <div class="mr_b15 m_input_wrap width90">
+        <div class="mr_b25 m_input_wrap width90">
             <input class="m_input m_pwd J_pwd" id="password2_input" type="password" placeholder="请再次输入登录密码" name="password2">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="password2_input"></a>
+            <p class="error hide" id="errorPassword"><font>两次密码输入不相同,请检查您输入的密码!</font></p>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="querstion1_input" type="text" placeholder="请输入安全问题一" name="querstion1">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="querstion1_input"></a>
+            <input class="m_name m_input" id="question1_input" type="text" placeholder="请输入安全问题一" name="question1">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="question1_input"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="ansower1_input" type="text" placeholder="请输入安全问题答案一" name="ansower1">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="ansower1_input"></a>
+            <input class="m_name m_input" id="answer1_input" type="text" placeholder="请输入安全问题答案一" name="answer1">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="answer1_input"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="querstion2_input" type="text" placeholder="请输入安全问题二" name="querstion2">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="querstion2_input"></a>
+            <input class="m_name m_input" id="question2_input" type="text" placeholder="请输入安全问题二" name="question2">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="question2_input"></a>
         </div>
         <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="ansower2_input" type="text" placeholder="请输入安全问题答案二" name="ansower2">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="ansower2_input"></a>
+            <input class="m_name m_input" id="answer2_input" type="text" placeholder="请输入安全问题答案二" name="answer2">
+            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="answer2_input"></a>
         </div>
         <div class="geetest">
             <div class="gt_bg"></div>
@@ -181,6 +188,17 @@
 
     var isTrue = false;
     var referrer = '';
+    $('#email_input').focus(function(){
+        if($('#errorMessage').attr('class').indexOf('hide')==-1){
+            $('#errorMessage').addClass('hide')
+        }
+
+    }),$('#password2_input').focus(function(){
+        if($('#errorPassword').attr('class').indexOf('hide')==-1){
+            $('#errorPassword').addClass('hide')
+        }
+
+    });
     $('.m_reset_btn').click(function(){
         var id = this.getAttribute('param');
         document.getElementById(id).value = '';
@@ -188,10 +206,10 @@
         var email = $('#email_input').val().trim();
         var password1 = $('#password1_input').val().trim();
         var password2 = $('#password2_input').val().trim();
-        var querstion1 = $('#querstion1_input').val().trim();
-        var ansower1 = $('#ansower1_input').val().trim();
-        var querstion2 = $('#querstion2_input').val().trim();
-        var ansower2 = $('#ansower2_input').val().trim();
+        var question1 = $('#question1_input').val().trim();
+        var answer1 = $('#answer1_input').val().trim();
+        var question2 = $('#question2_input').val().trim();
+        var answer2 = $('#answer2_input').val().trim();
         isTrue = false;
         if(email==''||email==null){
             check('email_input');
@@ -202,30 +220,41 @@
         if(password2==''||password2==null){
             check('password2_input');
         }
-        if(querstion1==''||querstion1==null){
-            check('querstion1_input');
+        if(password2!=password1){
+            $('#errorPassword').removeClass('hide');
+            return;
         }
-        if(ansower1==''||ansower1==null){
-            check('ansower1_input');
+        if(question1==''||question1==null){
+            check('question1_input');
         }
-        if(querstion2==''||querstion2==null){
-            check('querstion2_input');
+        if(answer1==''||answer1==null){
+            check('answer1_input');
         }
-        if(ansower2==''||ansower2==null){
-            check('ansower2_input');
+        if(question2==''||question2==null){
+            check('question2_input');
         }
-//        if(isTrue) return;
-        console.log($('#login-form').serialize())
-//        $.ajax({
-//            type: "post",
-//            dataType: "json",
-//            url: "http://192.165.1.1/wechat",
-//            data:$('#login-form').serialize(),
-//            success: function (msg) {
-//                var str = "";
-//            }
-//        });
-        window.location.href = "userdata.htm";
+        if(answer2==''||answer2==null){
+            check('answer2_input');
+        }
+        if(isTrue) return;
+        window.localStorage.setItem("register",$('#login-form').serialize());
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "http://127.0.0.1:8040/WeChat/wx/business/WeChart/check",
+            data:$('#login-form').serialize(),
+            success: function (msg) {
+                console.log(msg)
+                if(msg.data!=null){
+                    if(msg.data==0) {
+                        window.location.href = "userdata.htm";
+                    } else {
+                        $('#errorMessage').removeClass('hide');
+                    }
+                }
+            }
+        });
+
     });
 
     function check(id){

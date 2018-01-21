@@ -83,7 +83,7 @@
                 <span class="m_label">使用手机号码登录：</span>
             </div>
             <div class="mr_b15 m_input_wrap width90">
-                <input class="m_input m_name" type="text" id="email-input" autocomplete="on" placeholder="请输入邮箱或手机号码" name="email">
+                <input class="m_input m_name" type="text" id="email-input" autocomplete="on" placeholder="请输入邮箱或手机号码" name="userName">
                 <a href="javascript:void(0);" class="J_input_reset m_reset_btn m_reset_email"></a>
             </div>
             <div class="mr_b25 m_input_wrap width90">
@@ -181,7 +181,6 @@
     });
 
     $('.m_reset_email').click(function(){
-//        document.getElementById('email-input').value = '';
         $('#email-input').val('');
     }),$('.m_reset_password').click(function(){
         $('#password-input').val('');
@@ -198,10 +197,11 @@
         $.ajax({
             type: "post",
             dataType: "json",
-            url: "http://192.165.1.1/wechat",
+            url: "http://127.0.0.1:8040/WeChat/wx/business/WeChart/login",
             data:$('#login-form').serialize(),
             success: function (msg) {
-                var str = "";
+                window.localStorage.setItem("userInfo",msg.data);
+                window.localStorage.setItem("token",msg.data.id);
             }
         });
     });
@@ -214,8 +214,5 @@
         }
     }
     var cpro_id = "u2671677";
-    //    require(['app/mobile/login/login'], function (Login) {
-    //        Login.login.init('http://m.yinyuetai.com/');
-    //    });
 </script>
 </html>

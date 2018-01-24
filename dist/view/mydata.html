@@ -20,6 +20,12 @@
             color: #fff;
             font-size: 1rem;
         }
+        dl dd a {
+            background:none!important;
+        }
+        .message{
+            padding-left: 12px!important;
+        }
     </style>
 </head>
 <body>
@@ -30,42 +36,47 @@
 </div>
 <dl>
     <dt>
-        <a href="javascript:void(0)/user/51163938"><img src="http://userapi.17k.com/u51163938_180.img" alt="懒人模板制作"></a>
+        <a href="javascript:void(0);">
+            <img src="../images/user.png">
+        </a>
     <div>
-        <p><a href="javascript:void(0)/user/51163938">懒人模板制作</a></p>
-        <a class="info" href="javascript:void(0)show.action">个人资料</a>
+        <p>
+            <a href="javascript:void(0);" ><span id="loginUser">懒人模板制作</span></a>
+        </p>
+        <a class="info message" href="javascript:void(0);">修改个人资料</a>
     </div>
     </dt>
     <dd>
-        <a href="javascript:void(0)http://h5.17k.com/h5/pay/center.do">
-            <span class="charge">充值</span>
-            <span>余额：0K币</span>
+        <a href="javascript:void(0);">
+            <span id="companyName" class="charge"></span>
         </a>
     </dd>
     <dd>
-        <a href="javascript:void(0)http://h5.17k.com/h5/pay/baoyue.do">
-            <span class="member">开通会员</span>
-			<span>
-				免费看书，无广告
-			</span>
+        <a href="javascript:void(0);">
+            <span id="companyCode" class="member"></span>
+        </a>
+    </dd>
+    <dd>
+        <a href="javascript:void(0);">
+            <span id="telphone" class="telephone"></span>
         </a>
     </dd>
 </dl>
 
 <dl>
     <dd class="myBookshelf">
-        <a href="javascript:void(0)/h5/user/bookshelf.action">
+        <a href="javascript:void(0);">
             <span class="bookshelf">我的书架</span>
         </a>
     </dd>
     <dd class="myComment">
-        <a href="javascript:void(0)/h5/user/comment.action">
+        <a href="javascript:void(0);">
             <span class="comment">我的评论</span>
             <span class="tip"></span>
         </a>
     </dd>
     <dd class="myMessage">
-        <a href="javascript:void(0)/h5/user/messages.action">
+        <a href="javascript:void(0);">
             <span class="info">我的消息</span>
             <span class="tip"></span>
         </a>
@@ -74,16 +85,39 @@
 
 <dl>
     <dd>
-        <a href="javascript:void(0)/h5/author/authorCenter.action">
+        <a href="javascript:void(0);">
             <span class="author">作者中心</span>
         </a>
     </dd>
 </dl>
 
 <section class="loginout">
-    <a href="javascript:void(0)http://passport.17k.com/logout?url=http://h5.17k.com">退出登录</a>
+    <a href="javascript:void(0);">退出登录</a>
 </section>
 <script type="text/javascript">
+    var userInfo ;
+    initUserInfo();
+
+    function  initUserInfo(){
+        var loaclData = window.localStorage.getItem("userInfo");
+        userInfo = JSON.parse(loaclData);
+        console.log(loaclData)
+        var a=document.getElementById ("loginUser");
+        if(loaclData == null){
+            a.innerHTML = '未登录';
+        } else {
+            a.innerHTML = userInfo.userName;
+            a=document.getElementById ("companyName");
+            a.innerHTML = userInfo.companyName;
+            a=document.getElementById ("companyCode");
+            a.innerHTML = userInfo.companyCode;
+            a=document.getElementById ("telphone");
+            a.innerHTML = userInfo.telphone;
+
+        }
+
+    }
+
 </script>
 </body>
 </html>

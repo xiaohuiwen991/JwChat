@@ -71,7 +71,7 @@
 <body>
 <div class="m_wrap">
     <div class="m_header">
-        <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
+        <a href="javascript:void(0);" class="goback">返回</a>
         用户详细资料
         <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a>
     </div>
@@ -181,6 +181,8 @@
     $('.m_reset_btn').click(function(){
         var id = this.getAttribute('param');
         document.getElementById(id).value = '';
+    }),$('.goback').click(function(){
+        window.location.href = "register.htm";
     }),$('.m_submit').click(function(){
         var name = $('#name_input').val().trim();
         var company = $('#company_input').val().trim();

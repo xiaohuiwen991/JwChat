@@ -80,7 +80,7 @@
 <body>
 <div class="m_wrap">
     <div class="m_header">
-        <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
+        <a href="javascript:void(0);" class="goback">返回</a>
         用户注册
         <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a></div>
     <br/>
@@ -202,6 +202,8 @@
     $('.m_reset_btn').click(function(){
         var id = this.getAttribute('param');
         document.getElementById(id).value = '';
+    }),$('.goback').click(function(){
+        window.location.href = "login.htm";
     }),$('.m_submit').click(function(){
         var email = $('#email_input').val().trim();
         var password1 = $('#password1_input').val().trim();

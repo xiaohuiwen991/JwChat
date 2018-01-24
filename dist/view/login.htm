@@ -75,7 +75,7 @@
 <body>
     <div class="m_wrap">
         <div class="m_header">
-            <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
+            <a href="javascript:void(0);" class="goback">返回</a>
             账号登录<a class="m_header_refresh J_refresh" href="javascript:void(0);"></a>
         </div>
         <form id="login-form" name="pop-form-login">
@@ -184,6 +184,8 @@
         $('#email-input').val('');
     }),$('.m_reset_password').click(function(){
         $('#password-input').val('');
+    }),$('.goback').click(function(){
+        window.location.href = "../wap_jypx6.html";
     }),$('.m_submit').click(function(){
         var email = $('#email-input').val().trim();
         var password = $('#password-input').val().trim();
@@ -200,7 +202,9 @@
             url: "http://127.0.0.1:8040/WeChat/wx/business/WeChart/login",
             data:$('#login-form').serialize(),
             success: function (msg) {
-                window.localStorage.setItem("userInfo",msg.data);
+                window.localStorage.removeItem("userInfo");
+                window.localStorage.removeItem("token");
+                window.localStorage.setItem("userInfo",JSON.stringify(msg.data));
                 window.localStorage.setItem("token",msg.data.id);
             }
         });

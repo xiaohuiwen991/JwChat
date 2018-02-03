@@ -10,6 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
     <link rel="stylesheet" href="../css/common.css"/>
+
+    <link type="text/css" rel="stylesheet" href="../css/wap/web_frame.css??ver1" />
+    <link type="text/css" rel="stylesheet" href="../css/wap/change_module.css?ver1" />
+
     <script src="../js/require.2.1.9-jquery.2.0.3-underscore.1.5.2-backbone.1.0.0.js"></script>
     <style type="text/css">
         .geetest {
@@ -70,6 +74,9 @@
             /* placeholder颜色  */
             color: red;
         }
+        ol, ul, dl, menu li {
+            list-style: none;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +97,36 @@
         <div class="ex-wrap ex-href">
         </div>
     </div>
+</div>
+
+<div class="toolMenuBg" id="tool_menu_bg" ></div>
+<div class="toolMenu" id="tool_menu" >
+    <menu class="toolBut q">
+        <li id="toolHome" sorts="9" style=" width:33%;">
+            <a id="index_link1" href="../wap_jypx6.html"  >
+                <b class="icon" id="icon_960813">
+                    <img src="../images/wap/toolHome_icon.png" />
+                </b>
+                <strong>首页</strong>
+            </a>
+        </li>
+        <li id="toolTel" sorts="8" style=" width:33%;">
+            <a  href="contact.html"  >
+                <b class="icon" id="icon_960810">
+                    <img src="../images/wap/toolTel_icon.png" />
+                </b>
+                <strong>电话</strong>
+            </a>
+        </li>
+        <li id="toolMember" sorts="1" style=" width:33%;">
+            <a  href="mydata.html"  >
+                <b class="icon" id="icon_960814">
+                    <img src="../images/wap/toolMember_icon.png" />
+                </b>
+                <strong>会员</strong>
+            </a>
+        </li>
+    </menu>
 </div>
 <script type="text/javascript">
     var device = (function () {

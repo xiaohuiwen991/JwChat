@@ -7,8 +7,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta content="telephone=no" name="format-detection" />
+    <link type="text/css" rel="stylesheet" href="../css/front.css" />
+
+    <link type="text/css" rel="stylesheet" href="../css/wap/web_frame.css??ver1" />
+    <link type="text/css" rel="stylesheet" href="../css/wap/change_module.css?ver1" />
+
     <style type="text/css">
         #box1,#box2,#box3,#box4{padding:10px;border:1px solid green;}
+        ol, ul, dl, menu li {
+            list-style: none;
+        }
     </style>
     <script type="text/javascript">
         //===========================点击展开关闭效果====================================
@@ -38,8 +46,9 @@
 </head>
 <body>
 <div>
-    <h2>锦钰业务</h2>
-    <h3>Jin Yu Bussiness</h3>
+    <h2 class="front-blue-v1">锦钰业务</h2>
+    <h3 class="front-blue-v1">Jin Yu Bussiness</h3>
+    <hr>
 </div>
 <p><a href="###" onclick="openShutManager(this,'box1',false,'环境检测Environmental Testing','环境检测Environmental Testing')">环境检测Environmental Testing</a></p>
 <p id="box1" style="display:none">
@@ -103,6 +112,36 @@
         <p>项目的成果：给园区内的企业带来节约成本的经济利益，也降低了其对周围环境的负面影响作用，具有双赢的效果。</p>
     </li>
 </ul>
+</div>
+
+<div class="toolMenuBg" id="tool_menu_bg" ></div>
+<div class="toolMenu" id="tool_menu" >
+    <menu class="toolBut q">
+        <li id="toolHome" sorts="9" style=" width:33%;">
+            <a id="index_link1" href="../wap_jypx6.html"  >
+                <b class="icon" id="icon_960813">
+                    <img src="../images/wap/toolHome_icon.png" />
+                </b>
+                <strong>首页</strong>
+            </a>
+        </li>
+        <li id="toolTel" sorts="8" style=" width:33%;">
+            <a  href="contact.html"  >
+                <b class="icon" id="icon_960810">
+                    <img src="../images/wap/toolTel_icon.png" />
+                </b>
+                <strong>电话</strong>
+            </a>
+        </li>
+        <li id="toolMember" sorts="1" style=" width:33%;">
+            <a  href="mydata.html"  >
+                <b class="icon" id="icon_960814">
+                    <img src="../images/wap/toolMember_icon.png" />
+                </b>
+                <strong>会员</strong>
+            </a>
+        </li>
+    </menu>
 </div>
 </body>
 </html>

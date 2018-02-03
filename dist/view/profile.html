@@ -7,6 +7,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta content="telephone=no" name="format-detection" />
+    <link type="text/css" rel="stylesheet" href="../css/front.css" />
+
+    <link type="text/css" rel="stylesheet" href="../css/wap/web_frame.css??ver1" />
+    <link type="text/css" rel="stylesheet" href="../css/wap/change_module.css?ver1" />
+
     <title>企业文化</title>
     <style type="text/css">
         <!--
@@ -14,6 +19,14 @@
         .STYLE4 {font-size: 18px; color: #0033FF; }
         .STYLE5 {color: #0066FF}
         -->
+        ol, ul, dl, menu li {
+            list-style: none;
+        }
+
+        body {
+            display: block;
+            margin: 8px;
+        }
     </style>
 <div>
     <img src="../images/logo/logo.jpg" width="100%" height="110">
@@ -21,8 +34,9 @@
 </head>
 <body>
 <div>
-  <h2 class="STYLE5">企业文化</h2>
-  <h3>Company Profile</h3>
+    <h2 class="STYLE5">企业文化</h2>
+    <h3 class="STYLE5">Company Profile</h3>
+    <hr>
 </div>
 <p>企业文化：</p>
 <p>
@@ -39,5 +53,35 @@
 <p class="STYLE2">企业精神</p>
 <p>讲真话，干实事</p>
 <br />
+
+<div class="toolMenuBg" id="tool_menu_bg" ></div>
+<div class="toolMenu" id="tool_menu" >
+    <menu class="toolBut q">
+        <li id="toolHome" sorts="9" style=" width:33%;">
+            <a id="index_link1" href="../wap_jypx6.html"  >
+                <b class="icon" id="icon_960813">
+                    <img src="../images/wap/toolHome_icon.png" />
+                </b>
+                <strong>首页</strong>
+            </a>
+        </li>
+        <li id="toolTel" sorts="8" style=" width:33%;">
+            <a  href="contact.html"  >
+                <b class="icon" id="icon_960810">
+                    <img src="../images/wap/toolTel_icon.png" />
+                </b>
+                <strong>电话</strong>
+            </a>
+        </li>
+        <li id="toolMember" sorts="1" style=" width:33%;">
+            <a  href="mydata.html"  >
+                <b class="icon" id="icon_960814">
+                    <img src="../images/wap/toolMember_icon.png" />
+                </b>
+                <strong>会员</strong>
+            </a>
+        </li>
+    </menu>
+</div>
 </body>
 </html>

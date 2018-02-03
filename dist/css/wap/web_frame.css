@@ -48,7 +48,7 @@ a{text-decoration:none;}
 /*.cityMo a em.icon1{border-color:#fff transparent transparent; z-index: 1; top:5px;}*/
 /*.cityMo a em.icon2{border-color:#999 transparent transparent;}*/
 /**toolMenu**/
-.toolMenu{background-color: #EF9201; height:40px; position:fixed;  bottom:0px; left:0px; width:100%; z-index:80; _position:absolute; _bottom:auto; _top:expression(eval(document.documentElement.scrollTop+440));}
+.toolMenu{background-color: #1c97a5; height:40px; position:fixed;  bottom:0px; left:0px; width:100%; z-index:80; _position:absolute; _bottom:auto; _top:expression(eval(document.documentElement.scrollTop+440));}
 .backTop{width:45px; height:45px; position:fixed;z-index:100; right:2px; bottom:60px; overflow:hidden; border-radius:5px;  border-width:1px; border-style:solid; border-color:#aaa; cursor:pointer; background-color:#aaa; opacity:0.6; display:none;}
 .backTop em{display:block; width:0px; height:0px; overflow:hidden; position:absolute; top:-2px; left:6px; border-width:16px; border-style:dashed dashed solid dashed; border-color:transparent transparent #ccc;}
 	.toolBut{}

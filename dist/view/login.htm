@@ -236,13 +236,17 @@
         $.ajax({
             type: "post",
             dataType: "json",
-            url: "http://127.0.0.1:8040/WeChat/wx/business/WeChart/login",
+            url: "http://www.masterjoker.cn:8080/code/wx/business/WeChart/login",
             data:$('#login-form').serialize(),
             success: function (msg) {
-                window.localStorage.removeItem("userInfo");
-                window.localStorage.removeItem("token");
-                window.localStorage.setItem("userInfo",JSON.stringify(msg.data));
-                window.localStorage.setItem("token",msg.data.id);
+                if(msg!=null && msg.flag==1) {
+                    window.localStorage.removeItem("userInfo");
+                    window.localStorage.removeItem("token");
+                    window.localStorage.setItem("userInfo", JSON.stringify(msg.data));
+                    window.localStorage.setItem("token", msg.data.id);
+                    console.log(msg.data.id);
+                    window.location.href = "report.html";
+                }
             }
         });
     });

@@ -100,7 +100,7 @@
 </dl>
 
 <section class="loginout">
-    <a href="javascript:void(0);">退出登录</a>
+    <a href="javascript:void(0);" onclick="out()">退出登录</a>
 </section>
 
 <div class="toolMenuBg" id="tool_menu_bg" ></div>
@@ -154,7 +154,12 @@
             a.innerHTML = userInfo.telphone;
 
         }
+    }
 
+    function out() {
+        window.localStorage.removeItem("userInfo");
+        window.localStorage.removeItem("token");
+        window.location.href = "../wap_jypx6.html";
     }
 
 </script>

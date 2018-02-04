@@ -412,7 +412,12 @@ $(".baiduEditorTxtModule img").each(function(){
 $("#but_item_2536216").click(function(){
     window.location.href="view/company.html"
 }),$("#but_item_2536217").click(function(){
-    window.location.href="view/login.htm"
+    var user_token = window.localStorage.getItem("token");
+    if(user_token==null||user_token=='') {
+        window.location.href = "view/login.htm"
+    } else {
+        window.location.href = "view/report.html"
+    }
 }),$("#but_item_2536241").click(function(){
     window.location.href="view/profile.html"
 }),$("#but_item_2536242").click(function(){

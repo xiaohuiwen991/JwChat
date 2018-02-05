@@ -25,13 +25,12 @@
     </style>
     <title>公司动态</title>
     <div>
-        <img src="../images/logo/logo.jpg" width="384" height="110">
+        <img src="../images/logo/logo.jpg" width="100%" height="110">
     </div>
 </head>
 <body>
 <div>
-    <h2 class="front-blue-v1">监测报告查询</h2>
-    <h3 class="front-blue-v1">Jin Yu Report</h3>
+    <h3 class="front-blue-v1" id="h3"></h3>
     <hr>
 </div>
 <div id="abox">
@@ -69,27 +68,31 @@
 </body>
 <script type="text/javascript">
     var userInfo ;
-    initUserInfo();
+    var id;
+//    initUserInfo();
+    loadId();
 
-
-    function  initUserInfo(){
-        var token = window.localStorage.getItem("token");
+    function  initUserInfo(id){
         var a=document.getElementById ("abox");
         var htmlStr = '';
         var action = 'http://www.masterjoker.cn:8080/code/wx/business/WeChart';
         $.ajax({
             type: "post",
             dataType: "json",
-            url: action + "/report",
-            data:{'id':token},
+            url: action + "/pic",
+            data:{'id':id},
             success: function (msg) {
                 if(msg!=null && msg.flag==1) {
                     if(msg.data!=null) {
                         console.log(msg.data)
                         var data = msg.data;
-                        for(var i=0;i<data.length;i++){
-                            htmlStr = htmlStr + '<p><a href="###" onclick="viewReport(\''+data[i].id+'\')">'+data[i].fileName+'------------'+data[i].createDateStr +'</a></p>';
+                        if(data!=null) {
+                            var img = data.img;
+                            for (var i = 0; i < img.length; i++) {
+                                htmlStr = htmlStr + '<p><img src="http://www.masterjoker.cn'+img[i]+'" width="100%" height="100%"></p>';
+                            }
                         }
+                        console.log(htmlStr);
                         a.innerHTML = htmlStr;
                     }
                 } else {
@@ -99,8 +102,24 @@
         });
     }
 
+    function loadId() {
+        //获取url中"?"符后的字串 ('?modFlag=business&role=1')
+        var url = location.search;
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1); //substr()方法返回从参数值开始到结束的字符串；
+            var strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                id = strs[i].split("=")[1];
+            }
+            if (id!=null && id!='') {
+                initUserInfo(id);
+            }
+        }
+    }
+
     function viewReport(id) {
-        window.location.href = "show.html?id="+id;
+        var action = 'http://www.masterjoker.cn:8080/code/wx/business/WeChart';
+        window.open(action+"/pic?id="+id, '_blank');
     }
 
 </script>

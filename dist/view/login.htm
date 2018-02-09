@@ -73,6 +73,12 @@
         /* placeholder颜色  */
         color: red;
     }
+
+    p.error {
+        margin-left: 30px;
+        color: red;
+    }
+
 </style>
 </head>
 <body>
@@ -92,6 +98,9 @@
             <div class="mr_b25 m_input_wrap width90">
                 <input class="m_input m_pwd J_pwd" id="password-input" type="password" placeholder="请输入登录密码" name="password">
                 <a href="javascript:void(0);" class="J_input_reset m_reset_btn m_reset_password"></a>
+            </div>
+            <div class="mr_b15 m_input_wrap width90 error hide" id="errorLogin">
+                <p class="error" ><font>账户名或密码错误,请检查后重试!</font></p>
             </div>
             <div class="geetest">
                 <div class="gt_bg"></div>
@@ -156,6 +165,10 @@
     }
 </style>
 <script type="text/javascript">
+
+    var page = '';
+    var isTrue = false;
+    loadId();
 
     var device = (function () {
         var a;
@@ -232,7 +245,8 @@
         if(password==''||password==null){
             check('password-input');
         }
-        console.log($('#login-form').serialize())
+        console.log($('#login-form').serialize());
+        if(isTrue) return;
         $.ajax({
             type: "post",
             dataType: "json",
@@ -245,10 +259,28 @@
                     window.localStorage.setItem("userInfo", JSON.stringify(msg.data));
                     window.localStorage.setItem("token", msg.data.id);
                     console.log(msg.data.id);
-                    window.location.href = "report.html";
+                    if (page!=null && page == 'mydata') {
+                        window.location.href = "mydata.html";
+                    } else {
+                        window.location.href = "report.html";
+                    }
+                } else {
+                    $('#errorLogin').removeClass('hide');
                 }
             }
         });
+    });
+
+    $('#email-input').focus(function(){
+        if($('#errorLogin').attr('class').indexOf('hide')==-1){
+            $('#errorLogin').addClass('hide')
+        }
+
+    }),$('#password-input').focus(function(){
+        if($('#errorLogin').attr('class').indexOf('hide')==-1){
+            $('#errorLogin').addClass('hide')
+        }
+
     });
 
     function check(id){
@@ -256,8 +288,21 @@
         if(text.trim()==''||text.trim()==null){
             document.getElementById(id).value = '';
             $('#'+id).addClass('check');
+            isTrue = true;
         }
     }
-    var cpro_id = "u2671677";
+
+    function loadId() {
+        //获取url中"?"符后的字串 ('?modFlag=business&role=1')
+        var url = location.search;
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1); //substr()方法返回从参数值开始到结束的字符串；
+            var strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                page = strs[i].split("=")[1];
+            }
+            console.log(page)
+        }
+    }
 </script>
 </html>

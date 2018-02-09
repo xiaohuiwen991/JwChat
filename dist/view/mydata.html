@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <head>
     <title>用户详细资料</title>
-    <link rel="icon" href="javascript:void(0)/favicon.ico" type="image/icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
@@ -34,6 +33,13 @@
         ol, ul, dl, menu li {
             list-style: none;
         }
+        .comment {
+            padding-top: 0px;
+        }
+        .loginout {
+            padding-top: 42px;
+            padding-bottom: 0px;
+        }
     </style>
 </head>
 <body>
@@ -47,11 +53,11 @@
         <a href="javascript:void(0);">
             <img src="../images/user.png">
         </a>
-    <div>
+    <div id="loginInfo">
         <p>
-            <a href="javascript:void(0);" ><span id="loginUser">懒人模板制作</span></a>
+            <a href="javascript:void(0);" ><span id="loginUser">未登录</span></a>
         </p>
-        <a class="info message" href="javascript:void(0);">修改个人资料</a>
+        <a class="info message" id="remarks" href="javascript:void(0);">修改个人资料</a>
     </div>
     </dt>
     <dd>
@@ -73,13 +79,13 @@
 
 <dl>
     <dd class="myBookshelf">
-        <a href="javascript:void(0);">
-            <span class="bookshelf">我的书架</span>
+        <a href="javascript:void(0);" id="myReport">
+            <span class="bookshelf">我的检测报告</span>
         </a>
     </dd>
     <dd class="myComment">
-        <a href="javascript:void(0);">
-            <span class="comment">我的评论</span>
+        <a href="javascript:void(0);" id="myApplication">
+            <span class="comment">我的检测申请</span>
             <span class="tip"></span>
         </a>
     </dd>
@@ -90,20 +96,11 @@
         </a>
     </dd>
 </dl>
-
-<dl>
-    <dd>
-        <a href="javascript:void(0);">
-            <span class="author">作者中心</span>
-        </a>
-    </dd>
-</dl>
-
 <section class="loginout">
-    <a href="javascript:void(0);" onclick="out()">退出登录</a>
+    <a href="javascript:void(0);" id="clickButton">退出登录</a>
 </section>
 
-<div class="toolMenuBg" id="tool_menu_bg" ></div>
+<div class="toolMenuBg hide" id="tool_menu_bg" ></div>
 <div class="toolMenu" id="tool_menu" >
     <menu class="toolBut q">
         <li id="toolHome" sorts="9" style=" width:33%;">
@@ -135,15 +132,21 @@
 
 <script type="text/javascript">
     var userInfo ;
+    var idLogin = false;
     initUserInfo();
 
     function  initUserInfo(){
         var loaclData = window.localStorage.getItem("userInfo");
         userInfo = JSON.parse(loaclData);
+        var buttom = document.getElementById ("clickButton");
+        var remarks = document.getElementById ("remarks");
         console.log(loaclData)
         var a=document.getElementById ("loginUser");
         if(loaclData == null){
             a.innerHTML = '未登录';
+            remarks.innerHTML = '点击登录';
+            buttom.innerHTML = '点击登录';
+            idLogin = false;
         } else {
             a.innerHTML = userInfo.userName;
             a=document.getElementById ("companyName");
@@ -152,15 +155,52 @@
             a.innerHTML = userInfo.companyCode;
             a=document.getElementById ("telphone");
             a.innerHTML = userInfo.telphone;
-
+            idLogin = true;
         }
     }
 
-    function out() {
-        window.localStorage.removeItem("userInfo");
-        window.localStorage.removeItem("token");
-        window.location.href = "../wap_jypx6.html";
+    function login(){
+        if(!idLogin) {
+            window.location.href = "login.htm?page=mydata"
+        }
     }
+
+    function loginOrOut(){
+        if(!idLogin) {
+            window.location.href = "login.htm?page=mydata"
+        } else {
+            idLogin = false;
+            window.localStorage.removeItem("userInfo");
+            window.localStorage.removeItem("token");
+            window.location.href = "../wap_jypx6.html";
+        }
+    }
+
+    function viewMyReport(){
+        if(!idLogin) {
+            window.location.href = "login.htm"
+        } else {
+            window.location.href = "report.html";
+        }
+    }
+
+    function viewApplication(){
+        if(!idLogin) {
+            window.location.href = "login.htm"
+        } else {
+            window.location.href = "../wap_jypx6.html";
+        }
+    }
+
+    $('#clickButton').on('click',function(){
+        loginOrOut()
+    }),$('#loginInfo').on('click',function(){
+        login()
+    }),$('#myReport').on('click',function(){
+        viewMyReport()
+    }),$('#myApplication').on('click',function(){
+        viewApplication()
+    });
 
 </script>
 </body>

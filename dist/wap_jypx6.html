@@ -96,7 +96,7 @@ var home_index='1';
                     <a id="logo_link" href="wap_jypx6.html?showWelcome=1">
                         <div style="text-align:center;">
                              <!--<span style="line-height:2.5;color:#FFFFFF;font-size:24px;"><strong>锦钰检测技术有限公司</strong></span>-->
-                            <img src="images/logo/logo.jpg">
+                            <img src="images/logo/logo_bak.jpg">
                         </div>
                     </a>
             </div>
@@ -264,7 +264,7 @@ var home_index='1';
                         </li>
                         <li id="but_item_2536229" class="butItem  newBbutItem">
                             <a   data-height="100" class="itemA" href="#"><span class=" yuanImgicon  "   style="left: 0%; top: 0%;"  data-picwidth="315" data-picheight="230" data-left="0">
-                                <img src="images/show/check.jpg" width="" height=""></span><span  style="left: 0.52%; top: 29%;"  class="butText" data-left="0.52">申请监测<br>APPLCATION</span>
+                                <img src="images/show/check.jpg" width="" height=""></span><span  style="left: 0.52%; top: 29%;"  class="butText" data-left="0.52">申请检测<br>APPLCATION</span>
                             </a>
                         </li>
                         <li id="but_item_2536241" class="butItem  newBbutItem">
@@ -303,7 +303,7 @@ var home_index='1';
 <script type="text/javascript" src="js/wap/self_edit.js?ver1"></script>
 
 <div style="width:100%;line-height:45px;text-align:center;" class="ev_zhichi">
-    <a href="http://www.jinyutest.com/index.php/welcome" rel="nofollow" target="_blank" style="text-decoration:underline"><p>COPYRiGHT @ 2015 浙江锦钰检测技术有限公司 浙ICP备15041285号-1 版权所有</p></a>
+    <a href="http://www.jinyutest.com/index.php/welcome" rel="nofollow" target="_blank" style="text-decoration:underline"><p>COPYRiGHT @ 2015 浙江锦钰检测技术有限公司</p></a>
 </div>
        
 <!--文章详细页不显示底部-->
@@ -417,6 +417,13 @@ $("#but_item_2536216").click(function(){
         window.location.href = "view/login.htm"
     } else {
         window.location.href = "view/report.html"
+    }
+}),$("#but_item_2536229").click(function(){
+    var user_token = window.localStorage.getItem("token");
+    if(user_token==null||user_token=='') {
+        window.location.href = "view/login.htm?page=application"
+    } else {
+        window.location.href = "view/application.html"
     }
 }),$("#but_item_2536241").click(function(){
     window.location.href="view/profile.html"

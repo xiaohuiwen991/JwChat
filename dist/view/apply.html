@@ -110,7 +110,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 data: {'pid': token,'remarks':remarks},
                 success: function (msg) {
                     if (msg != null && msg.flag == 1) {
-
+                        window.location.href = "application.html";
                     } else {
                         $('#errorMsg').removeClass('hide');
                     }

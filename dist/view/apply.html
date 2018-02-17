@@ -15,6 +15,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!--<link href="../css/wap/apply/apply.css" rel="stylesheet" type="text/css" media="all" />-->
     <link href="../css/wap/apply/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="../css/wap/apply/style.css" rel="stylesheet" type='text/css' media="all" />
+    <script src="../js/require.2.1.9-jquery.2.0.3-underscore.1.5.2-backbone.1.0.0.js"></script>
+    <link rel="stylesheet" href="../css/common.css"/>
 
     <link type="text/css" rel="stylesheet" href="../css/wap/web_frame.css??ver1" />
     <link type="text/css" rel="stylesheet" href="../css/wap/change_module.css?ver1" />
@@ -32,7 +34,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         margin: 8px;
     }
     .textarea-height{
-        height:300px!important;
+        height:280px!important;
+    }
+
+    textarea.check::-webkit-input-placeholder {
+        /* placeholder颜色  */
+        color: red!important;
+    }
+
+    p.error {
+        margin-left: 80px;
+        color: red;
     }
 </style>
 <body>
@@ -41,11 +53,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="content1-agile">
         <div class="info-w3l">
             <h2 class="wthree">申请内容</h2>
-            <form action="#" method="post" class="form-agileits">
+            <form method="post" class="form-agileits">
                 <!--<input type="text" id="username" name="username" placeholder="Username" title="Please enter your First Name" required="">
                 <input type="email" id="email" name="email" placeholder="mail@example.com" title="Please enter a Valid Email Address" required="">-->
-                <textarea id="message" name="message" placeholder="Your Message" class="textarea-height" title="Please enter Your Comments"></textarea>
-                <input type="submit" class="sign-in" value="提交">
+                <textarea id="message" name="message" placeholder="请填写你的申请内容" class="textarea-height" title="请填写你的申请内容"></textarea>
+                <div class="mr_b15 m_input_wrap width90 error hide" id="errorMsg">
+                    <p class="error" ><font>服务器繁忙,请稍后再试!</font></p>
+                </div>
+                <input type="button" class="sign-in" id="submit" value="提交">
             </form>
         </div>
     </div>
@@ -80,4 +95,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </li>
     </menu>
 </div>
+<script type="text/javascript">
+
+    $('#submit').on('click',function(){
+        var token = window.localStorage.getItem("token");
+        var remarks = document.getElementById("message").value;
+        var action = 'http://www.masterjoker.cn:8080/code/wx/business/WeChart';
+//        var action = 'http://localhost:8080/code/wx/business/WeChart';
+        if(remarks!=null && remarks!='') {
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: action + "/application/add",
+                data: {'pid': token,'remarks':remarks},
+                success: function (msg) {
+                    if (msg != null && msg.flag == 1) {
+
+                    } else {
+                        $('#errorMsg').removeClass('hide');
+                    }
+                }
+            });
+        } else {
+            $("#message").addClass('check');
+        }
+    });
+
+    $('#message').focus(function(){
+        if($('#errorMsg').attr('class').indexOf('hide')==-1){
+            $('#errorMsg').addClass('hide')
+        }
+    })
+
+</script>
 </html>

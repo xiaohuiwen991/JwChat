@@ -13,6 +13,21 @@
     <link type="text/css" rel="stylesheet" href="../css/wap/change_module.css?ver1" />
 
     <style>
+        .font0{
+            color:#D5CD30;
+        }
+        .font1{
+            color: #d5cd30;
+        }
+        .font2{
+            color:lawngreen;
+        }
+        .font3{
+            color:lawngreen;
+        }
+        .font4{
+            color:red;
+        }
         .content-feature-grids h3{
             color:black;
         }
@@ -30,6 +45,9 @@
             padding-top: 42px;
             padding-bottom: 0px;
         }
+        .feature-grid{
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -39,76 +57,6 @@
             <h3>我的检测申请</h3>
             <p>My Application</p>
             <div class="col-md-6" id="application-div">
-                <div class="feature-grid">
-                    <div class="feature-grid-left icon2">
-                        <span> </span>
-                    </div>
-                    <div class="feature-grid-right">
-                        <h2>All-new design</h2>
-                        <p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="feature-grid">
-                    <div class="feature-grid-left icon2">
-                        <span> </span>
-                    </div>
-                    <div class="feature-grid-right">
-                        <h2>All-new design</h2>
-                        <p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="feature-grid">
-                    <div class="feature-grid-left icon2">
-                        <span> </span>
-                    </div>
-                    <div class="feature-grid-right">
-                        <h2>All-new design</h2>
-                        <p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="feature-grid">
-                    <div class="feature-grid-left icon2">
-                        <span> </span>
-                    </div>
-                    <div class="feature-grid-right">
-                        <h2>All-new design</h2>
-                        <p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="feature-grid">
-                    <div class="feature-grid-left icon2">
-                        <span> </span>
-                    </div>
-                    <div class="feature-grid-right">
-                        <h2>All-new design</h2>
-                        <p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="feature-grid">
-                    <div class="feature-grid-left icon2">
-                        <span> </span>
-                    </div>
-                    <div class="feature-grid-right">
-                        <h2>All-new design</h2>
-                        <p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="feature-grid">
-                    <div class="feature-grid-left icon2">
-                        <span> </span>
-                    </div>
-                    <div class="feature-grid-right">
-                        <h2>All-new design</h2>
-                        <p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
             </div>
             <hr>
             <section class="loginout">
@@ -157,40 +105,43 @@
         var a=document.getElementById ("application-div");
         var htmlStr = '';
         var action = 'http://www.masterjoker.cn:8080/code/wx/business/WeChart';
-//        $.ajax({
-//            type: "post",
-//            dataType: "json",
-//            url: action + "/application",
-//            data:{'id':token},
-//            success: function (msg) {
-//                if(msg!=null && msg.flag==1) {
-//                    if(msg.data!=null) {
-//                        console.log(msg.data)
-//                        var data = msg.data;
-//                        for(var i=0;i<data.length;i++){
-//                            htmlStr = htmlStr + '<p><a href="###" onclick="viewReport(\''+data[i].id+'\')">'+data[i].fileName+'------------'+data[i].createDateStr +'</a></p>';
-//                        }
-//                        a.innerHTML = htmlStr;
-//                    }
-//                } else {
-//                    a.innerHTML = '暂无检测报告!';
-//                }
-//            }
-//        });
-        htmlStr = htmlStr + '' +
-                '<div class="feature-grid">' +
-                    '<div class="feature-grid-left icon2">' +
-                        '<span> </span>' +
-                    '</div>' +
-                    '<div class="feature-grid-right">' +
-                        '<h2>2017-05-01 22:30</h2> ' +
-                        '<p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p> ' +
-                    '</div>' +
-                    '<div class="clearfix"></div>' +
-                '</div>';
-        htmlStr = htmlStr + htmlStr + htmlStr + htmlStr +htmlStr + htmlStr ;
-        a.innerHTML = htmlStr;
-
+//        var action = 'http://localhost:8080/code/wx/business/WeChart';
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: action + "/application/query",
+            data:{'id':token},
+            success: function (msg) {
+                if(msg!=null && msg.flag==1) {
+                    if(msg.data!=null) {
+                        console.log(msg.data)
+                        var data = msg.data;
+                        for(var i=0;i<data.length;i++) {
+                            if (data[i] != null) {
+                                var date = data[i].createDateStr;
+                                if (date != null && date != '') {
+                                    date = date.substring(0,date.length-4);
+                                }
+                                htmlStr = htmlStr + '' +
+                                        '<div class="feature-grid">' +
+                                        '<div class="feature-grid-left icon2">' +
+                                        '<span> </span>' +
+                                        '</div>' +
+                                        '<div class="feature-grid-right">' +
+                                        '<h2>' + date +'&nbsp;&nbsp;&nbsp;<span class="font'+data[i].status+'">' + data[i].statusStr + '</span></h2> ' +
+                                        '<p> 检测内容:&nbsp;&nbsp;' + data[i].remarks + ' </p> ' +
+                                        '</div>' +
+                                        '<div class="clearfix"></div>' +
+                                        '</div>';
+                            }
+                        }
+                        a.innerHTML = htmlStr;
+                    }
+                } else {
+                    a.innerHTML = '暂无检测报告!';
+                }
+            }
+        });
     }
 
     function viewReport(id) {

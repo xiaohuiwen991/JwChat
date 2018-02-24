@@ -140,7 +140,6 @@
         userInfo = JSON.parse(loaclData);
         var buttom = document.getElementById ("clickButton");
         var remarks = document.getElementById ("remarks");
-        console.log(loaclData)
         var a=document.getElementById ("loginUser");
         if(loaclData == null){
             a.innerHTML = '未登录';
@@ -188,7 +187,7 @@
         if(!idLogin) {
             window.location.href = "login.htm"
         } else {
-            window.location.href = "../wap_jypx6.html";
+            window.location.href = "application.html";
         }
     }
 

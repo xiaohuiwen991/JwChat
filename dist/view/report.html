@@ -28,6 +28,25 @@
         .feature-grid{
             width: 100%;
         }
+        .right-a{
+            float: right;
+            align: right;
+        }
+        .feature-grid a:link {
+            font-size: 16px;
+            color: #188dff;
+            text-decoration: none;
+        }
+        .feature-grid a:visited {
+            font-size: 16px;
+            color: #188dff;
+            text-decoration: none;
+        }
+        .feature-grid a:hover {
+            font-size: 16px;
+            color: #188dff;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +97,9 @@
 
     function  initUserInfo(){
         var token = window.localStorage.getItem("token");
+        if (token==null || token=='') {
+            window.location.href = "login.htm?page=report"
+        }
         var a=document.getElementById ("application-div");
         var htmlStr = '';
         var action = 'http://www.masterjoker.cn:8080/code/wx/business/WeChart';
@@ -98,8 +120,10 @@
                                     '<span> </span>' +
                                     '</div>' +
                                     '<div class="feature-grid-right">' +
-                                    '<h2>'+data[i].createDateStr +'</h2> ' +
-                                    '<p>'+data[i].fileName+'</p> ' +
+                                    '<h2>'+data[i].createDateStr +'' +
+//                                    '<a class="right-a" href="javascript:void(0)" onclick="downloadReport(\''+data[i].fileName+'\',\''+data[i].pdfPath+'\')">下载文件</a>' +
+                                    '</h2> ' +
+                                    '<p style="word-break: break-all; word-wrap:break-word;">'+data[i].fileName+'</p> ' +
                                     '</div>' +
                                     '<div class="clearfix"></div>' +
                                     '</div><div class="feature-grid" ><hr></div>';
@@ -109,6 +133,19 @@
                 } else {
                     a.innerHTML = '暂无检测报告!';
                 }
+            }
+        });
+    }
+
+    function downloadReport(fileName,pdfPath) {
+        alert()
+        var action = 'http://localhost:8080/code/wx/business/WeChart/download/pdf?fileName='+ encodeURI(encodeURI(fileName)) +'&pdfPath='+encodeURI(encodeURI(pdfPath))+'';
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: action,
+            success: function (msg) {
+
             }
         });
     }

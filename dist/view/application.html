@@ -28,6 +28,9 @@
         .font4{
             color:red;
         }
+        .font_bak{
+            color: #1d2bff;
+        }
         .content-feature-grids h3{
             color:black;
         }
@@ -47,6 +50,9 @@
         }
         .feature-grid{
             width: 100%;
+        }
+        .feature-grid-right {
+            width: 80%;
         }
     </style>
 </head>
@@ -102,6 +108,9 @@
 
     function  initUserInfo(){
         var token = window.localStorage.getItem("token");
+        if (token==null || token=='') {
+            window.location.href = "login.htm?page=application"
+        }
         var a=document.getElementById ("application-div");
         var htmlStr = '';
         var action = 'http://www.masterjoker.cn:8080/code/wx/business/WeChart';
@@ -110,7 +119,7 @@
             type: "post",
             dataType: "json",
             url: action + "/application/query",
-            data:{'id':token},
+            data:{'pid':token},
             success: function (msg) {
                 if(msg!=null && msg.flag==1) {
                     if(msg.data!=null) {
@@ -122,17 +131,32 @@
                                 if (date != null && date != '') {
                                     date = date.substring(0,date.length-4);
                                 }
-                                htmlStr = htmlStr + '' +
-                                        '<div class="feature-grid">' +
-                                        '<div class="feature-grid-left icon2">' +
-                                        '<span> </span>' +
-                                        '</div>' +
-                                        '<div class="feature-grid-right">' +
-                                        '<h2>' + date +'&nbsp;&nbsp;&nbsp;<span class="font'+data[i].status+'">' + data[i].statusStr + '</span></h2> ' +
-                                        '<p> 检测内容:&nbsp;&nbsp;' + data[i].remarks + ' </p> ' +
-                                        '</div>' +
-                                        '<div class="clearfix"></div>' +
-                                        '</div>';
+                                if(data[i].text!=null && data[i].text!='') {
+                                    htmlStr = htmlStr + '' +
+                                            '<div class="feature-grid">' +
+                                            '<div class="feature-grid-left icon2">' +
+                                            '<span> </span>' +
+                                            '</div>' +
+                                            '<div class="feature-grid-right">' +
+                                            '<h2>' + date + '&nbsp;&nbsp;&nbsp;<span class="font' + data[i].status + '">' + data[i].statusStr + '</span></h2> ' +
+                                            '<p style="word-break: break-all; word-wrap:break-word;"> <span class="font_bak">检测内容</span>:&nbsp;&nbsp;' + data[i].remarks + ' </p> ' +
+                                            '<p style="word-break: break-all; word-wrap:break-word;"> <span class="font_bak">反馈信息</span>:&nbsp;&nbsp;' + data[i].text + ' </p> ' +
+                                            '</div>' +
+                                            '<div class="clearfix"></div>' +
+                                            '</div>';
+                                } else {
+                                    htmlStr = htmlStr + '' +
+                                            '<div class="feature-grid">' +
+                                            '<div class="feature-grid-left icon2">' +
+                                            '<span> </span>' +
+                                            '</div>' +
+                                            '<div class="feature-grid-right">' +
+                                            '<h2>' + date + '&nbsp;&nbsp;&nbsp;<span class="font' + data[i].status + '">' + data[i].statusStr + '</span></h2> ' +
+                                            '<p style="word-break: break-all; word-wrap:break-word;"> <span class="font_bak">检测内容</span>:&nbsp;&nbsp;' + data[i].remarks + ' </p> ' +
+                                            '</div>' +
+                                            '<div class="clearfix"></div>' +
+                                            '</div>';
+                                }
                             }
                         }
                         a.innerHTML = htmlStr;

@@ -3,7 +3,7 @@
 <html lang="zh-cmn-Hans">
 <meta charset="UTF-8">
 <head>
-    <title>用户详细资料</title>
+    <title>注册成功</title>
     <link rel="icon" href="javascript:void(0)/favicon.ico" type="image/icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -44,6 +44,10 @@
             position: relative;
         }
 
+        .gt_wrapper {
+            margin: 0 auto;
+        }
+
         .geetest .gt_wrap .gt_top {
             padding: 0 8px;
             height: 44px;
@@ -70,7 +74,6 @@
             /* placeholder颜色  */
             color: red;
         }
-
         ol, ul, dl, menu li {
             list-style: none;
         }
@@ -79,57 +82,15 @@
 <body>
 <div class="m_wrap">
     <div class="m_header">
-        <a href="javascript:void(0);" class="goback">返回</a>
-        用户详细资料
-        <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a>
-    </div>
+        <a href="javascript:void();" class="goback">返回</a>
+        注册失败
+        <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a></div>
     <br/>
     <br/>
     <form id="login-form" name="pop-form-login" >
-
-        <input type="hidden" name="appkey" value="">
-
-        <div class="mr_b15 m_input_wrap width90">
-            <input class="m_input m_name" type="text" id="name_input" autocomplete="on" placeholder="请输入您的姓名" name="trueName">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="name_input"></a>
-        </div>
-        <div class="mr_b15 m_input_wrap width90">
-            <input class="m_input m_name" type="text" id="company_input" autocomplete="on" placeholder="请输入您的公司名称" name="companyName">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="company_input"></a>
-        </div>
-        <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="credit_input" type="text" placeholder="请输入您的企业信用识别代码" name="companyCode">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="credit_input"></a>
-        </div>
-        <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="contact_input" type="text" placeholder="请输入您的联系方式" name="telphone">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="contact_input"></a>
-        </div>
-        <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="report_input" type="text" placeholder="请输入您的寄送报告地址" name="reportAdress">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="report_input"></a>
-        </div>
-        <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="invoice_input" type="text" placeholder="请输入您的寄送发票地址" name="invoiceAdress">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="invoice_input"></a>
-        </div>
-        <div class="mr_b25 m_input_wrap width90">
-            <input class="m_name m_input" id="email_input" type="text" placeholder="请输入您的邮箱地址" name="email">
-            <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="email_input"></a>
-        </div>
-        <div class="geetest">
-            <div class="gt_bg"></div>
-            <div class="gt_wrap">
-                <div class="gt_top">
-                    <a class="gt_exit" id="gt_close" href="javascript:void(0);"></a>
-
-                    <div class="title">请拖动按钮通过验证</div>
-                </div>
-                <script type="text/javascript" src="http://api.geetest.com/get.php?gt=f43ff6668a26e10f745d87e1a7b5e731&width=300" async></script>
-            </div>
-        </div>
+        注册失败！服务器繁忙请稍后再试<br/><br/><br/><br/>
         <div class="mr_b15">
-            <input class="m_button m_submit" readonly="readonly" value="提交">
+            <input class="m_button m_submit" readonly="readonly" value="返回">
         </div>
     </form>
     <div class="external">
@@ -167,7 +128,6 @@
         </li>
     </menu>
 </div>
-
 <script type="text/javascript">
     var device = (function () {
         var a;
@@ -215,62 +175,14 @@
         isStageAPP = true;
     }
 
-    var isTrue = false;
     var referrer = '';
     $('.m_reset_btn').click(function(){
         var id = this.getAttribute('param');
         document.getElementById(id).value = '';
-    }),$('.goback').click(function(){
-        window.location.href = "register.htm";
     }),$('.m_submit').click(function(){
-        var name = $('#name_input').val().trim();
-        var company = $('#company_input').val().trim();
-        var credit = $('#credit_input').val().trim();
-        var contact = $('#contact_input').val().trim();
-        var report = $('#report_input').val().trim();
-        var invoice = $('#invoice_input').val().trim();
-        var email = $('#email_input').val().trim();
-        isTrue = false;
-        if(name==''||name==null){
-            check('name_input');
-        }
-        if(company==''||company==null){
-            check('company_input');
-        }
-        if(credit==''||credit==null){
-            check('credit_input');
-        }
-        if(contact==''||contact==null){
-            check('contact_input');
-        }
-        if(report==''||report==null){
-            check('report_input');
-        }
-        if(invoice==''||invoice==null){
-            check('invoice_input');
-        }
-        if(email==''||email==null){
-            check('email_input');
-        }
-        if(isTrue) return;
-
-        var data = $('#login-form').serialize();
-        var data2 = window.localStorage.getItem("register");
-        $.ajax({
-            type: "post",
-            dataType: "json",
-//            url: "http://localhost:8080/code/wx/business/WeChart/register",
-            url: "http://www.masterjoker.cn:8080/code/wx/business/WeChart/register",
-            data:data+'&'+data2,
-            success: function (msg) {
-                if(msg.flag == 1) {
-                    window.location.href = "success.htm";
-                } else {
-                    window.location.href = "error.htm";
-                }
-            }
-        });
-
+        window.location.href = "../wap_jypx6.html";
+    }),$('.goback').click(function(){
+        window.location.href = "../wap_jypx6.html";
     });
 
     function check(id){
@@ -278,7 +190,6 @@
         if(text.trim()==''||text.trim()==null){
             document.getElementById(id).value = '';
             $('#'+id).addClass('check');
-            isTrue = true;
         }
     }
 

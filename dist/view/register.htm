@@ -114,6 +114,7 @@
         <div class="mr_b25 m_input_wrap width90">
             <input class="m_name m_input" id="question1_input" type="text" placeholder="请输入安全问题一" name="question1">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="question1_input"></a>
+            <p class="error hide" id="querstionMessage1"><font>安全问题为找回密码的唯一依据,请谨慎设置!</font></p>
         </div>
         <div class="mr_b25 m_input_wrap width90">
             <input class="m_name m_input" id="answer1_input" type="text" placeholder="请输入安全问题答案一" name="answer1">
@@ -122,6 +123,7 @@
         <div class="mr_b25 m_input_wrap width90">
             <input class="m_name m_input" id="question2_input" type="text" placeholder="请输入安全问题二" name="question2">
             <a href="javascript:void(0);" class="J_input_reset m_reset_btn" param="question2_input"></a>
+            <p class="error hide" id="querstionMessage2"><font>安全问题为找回密码的唯一依据,请谨慎设置!</font></p>
         </div>
         <div class="mr_b25 m_input_wrap width90">
             <input class="m_name m_input" id="answer2_input" type="text" placeholder="请输入安全问题答案二" name="answer2">
@@ -234,6 +236,26 @@
     }),$('#password2_input').focus(function(){
         if($('#errorPassword').attr('class').indexOf('hide')==-1){
             $('#errorPassword').addClass('hide')
+        }
+
+    }),$('#question2_input').focus(function(){
+        if($('#querstionMessage2').attr('class').indexOf('hide')>-1){
+            $('#querstionMessage2').removeClass('hide')
+        }
+
+    }),$('#question2_input').focusout(function(){
+        if($('#querstionMessage2').attr('class').indexOf('hide')==-1){
+            $('#querstionMessage2').addClass('hide')
+        }
+
+    }),$('#question1_input').focus(function(){
+        if($('#querstionMessage1').attr('class').indexOf('hide')>-1){
+            $('#querstionMessage1').removeClass('hide')
+        }
+
+    }),$('#question1_input').focusout(function(){
+        if($('#querstionMessage1').attr('class').indexOf('hide')==-1){
+            $('#querstionMessage1').addClass('hide')
         }
 
     });

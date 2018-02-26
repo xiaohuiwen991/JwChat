@@ -83,11 +83,6 @@
 </head>
 <body>
 <div class="m_wrap">
-    <div class="m_header">
-        <a href="javascript:void(0);" class="goback">返回</a>
-        用户详细资料
-        <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a>
-    </div>
     <br/>
     <br/>
     <form id="login-form" name="pop-form-login" >
@@ -136,9 +131,6 @@
         </div>
         <div class="mr_b15">
             <input class="m_button m_submit" readonly="readonly" value="提交">
-        </div>
-        <div class="mr_b15">
-            <a class="m_button m_button_plain" href="javascript:void(0)">跳过个人信息设置</a>
         </div>
     </form>
     <div class="external">
@@ -194,6 +186,32 @@
             return a;
         }
     })();
+
+    var page = '';
+
+    loadId();
+
+    init();
+
+    function init() {
+        var token = window.localStorage.getItem("token");
+        if (token == null || token == '') {
+            window.location.href = "login.htm?page=report"
+        }
+        var loaclData = window.localStorage.getItem("userInfo");
+        if (loaclData!=null) {
+            var userInfo = JSON.parse(loaclData);
+            if (userInfo!=null) {
+                document.getElementById('name_input').value=userInfo.trueName;
+                document.getElementById('company_input').value=userInfo.companyName;
+                document.getElementById('credit_input').value=userInfo.companyCode;
+                document.getElementById('contact_input').value=userInfo.telphone;
+                document.getElementById('report_input').value=userInfo.reportAdress;
+                document.getElementById('invoice_input').value=userInfo.invoiceAdress;
+                document.getElementById('email_input').value=userInfo.email;
+            }
+        }
+    }
 
     //建立ios与native通信桥梁
     var ios_webview_bridge;
@@ -264,39 +282,48 @@
         if(isTrue) return;
 
         var data = $('#login-form').serialize();
-        var data2 = window.localStorage.getItem("register");
+        var token = window.localStorage.getItem("token");
         $.ajax({
             type: "post",
             dataType: "json",
-//            url: "http://localhost:8080/code/wx/business/WeChart/register",
-            url: "http://www.masterjoker.cn:8080/code/wx/business/WeChart/register",
-            data:data+'&'+data2,
+//            url: "http://localhost:8080/code/wx/business/WeChart/register/update",
+            url: "http://www.masterjoker.cn:8080/code/wx/business/WeChart/register/update",
+            data:data+'&id='+token,
             success: function (msg) {
-                if(msg.flag == 1) {
-                    window.location.href = "success.htm";
+                if (msg.flag == 1) {
+                    updateLocalData(token)
                 } else {
                     window.location.href = "error.htm";
                 }
             }
         });
 
-    }),$('.m_button_plain').click(function(){
-        var data2 = window.localStorage.getItem("register");
+    });
+
+    function updateLocalData(token){
         $.ajax({
             type: "post",
             dataType: "json",
-//            url: "http://localhost:8080/code/wx/business/WeChart/register",
-            url: "http://www.masterjoker.cn:8080/code/wx/business/WeChart/register",
-            data:data2,
+//            url: "http://localhost:8080/code/wx/business/WeChart/query/loginId",
+            url: "http://www.masterjoker.cn:8080/code/wx/business/WeChart/query/loginId",
+            data:'id='+token,
             success: function (msg) {
-                if(msg.flag == 1) {
-                    window.location.href = "success.htm";
+                if(msg!=null && msg.flag==1) {
+                    window.localStorage.removeItem("userInfo");
+                    window.localStorage.setItem("userInfo", JSON.stringify(msg.data));
+                    if (page!=null&&page!=''&&page=='report') {
+                        window.location.href = "report.html";
+                    } else if (page!=null&&page!=''&&page=='application') {
+                        window.location.href = "application.html";
+                    } else if (page!=null&&page!=''&&page=='mydata') {
+                        window.location.href = "mydata.html";
+                    }
                 } else {
-                    window.location.href = "error.htm";
+                    $('#errorLogin').removeClass('hide');
                 }
             }
         });
-    });
+    }
 
     function checkCompanyCode(){
         var reg = /^[0-9]*$/ ;
@@ -329,6 +356,19 @@
             document.getElementById(id).value = '';
             $('#'+id).addClass('check');
             isTrue = true;
+        }
+    }
+
+    function loadId() {
+        //获取url中"?"符后的字串 ('?modFlag=business&role=1')
+        var url = location.search;
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1); //substr()方法返回从参数值开始到结束的字符串；
+            var strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                page = strs[i].split("=")[1];
+            }
+            console.log(page)
         }
     }
 

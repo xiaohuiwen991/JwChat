@@ -99,6 +99,22 @@
         var token = window.localStorage.getItem("token");
         if (token==null || token=='') {
             window.location.href = "login.htm?page=report"
+        } else {
+            var loaclData = window.localStorage.getItem("userInfo");
+            if (loaclData!=null) {
+                var userInfo = JSON.parse(loaclData);
+                if (userInfo!=null) {
+                    var companyName = userInfo.companyName;
+                    var companyCode = userInfo.companyCode;
+                    if(companyName==null||companyName==''||companyCode==''||companyCode==null) {
+                        window.location.href = "jumping.html?page=report"
+                    }
+                } else {
+                    window.location.href = "jumping.html?page=report"
+                }
+            } else {
+                window.location.href = "jumping.html?page=report"
+            }
         }
         var a=document.getElementById ("application-div");
         var htmlStr = '';

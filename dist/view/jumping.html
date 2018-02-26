@@ -3,7 +3,7 @@
 <html lang="zh-cmn-Hans">
 <meta charset="UTF-8">
 <head>
-    <title>服务器繁忙</title>
+    <title>跳转</title>
     <link rel="icon" href="javascript:void(0)/favicon.ico" type="image/icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -91,9 +91,9 @@
     <br/>
     <form id="login-form" name="pop-form-login" >
         <img src="../images/waring2.png" class="waring"><br/><br/>
-        <span class="waring-font">服务器繁忙请稍后再试!</span><br/><br/><br/><br/>
+        <span class="waring-font">该功能需要完整的用户信息！</span><br/><br/>
         <div class="mr_b15">
-            <input class="m_button m_submit" readonly="readonly" value="返回">
+            <input class="m_button m_submit" readonly="readonly" value="填写用户信息">
         </div>
     </form>
     <div class="external">
@@ -132,6 +132,9 @@
     </menu>
 </div>
 <script type="text/javascript">
+
+    var page = '';
+
     var device = (function () {
         var a;
         return function () {
@@ -148,6 +151,8 @@
             return a;
         }
     })();
+
+    loadId()
 
     //建立ios与native通信桥梁
     var ios_webview_bridge;
@@ -183,9 +188,7 @@
         var id = this.getAttribute('param');
         document.getElementById(id).value = '';
     }),$('.m_submit').click(function(){
-        window.location.href = "../wap_jypx6.html";
-    }),$('.goback').click(function(){
-        window.location.href = "../wap_jypx6.html";
+        window.location.href = "supplement.html?page="+page;
     });
 
     function check(id){
@@ -193,6 +196,19 @@
         if(text.trim()==''||text.trim()==null){
             document.getElementById(id).value = '';
             $('#'+id).addClass('check');
+        }
+    }
+
+    function loadId() {
+        //获取url中"?"符后的字串 ('?modFlag=business&role=1')
+        var url = location.search;
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1); //substr()方法返回从参数值开始到结束的字符串；
+            var strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                page = strs[i].split("=")[1];
+            }
+            console.log(page)
         }
     }
 

@@ -43,11 +43,6 @@
     </style>
 </head>
 <body>
-<div class="m_header">
-    <a href="javascript:history.go(-1);location.reload()" class="goback">返回</a>
-    用户详细资料
-    <a class="m_header_refresh J_refresh" href="javascript:void(0);"></a>
-</div>
 <dl>
     <dt>
         <a href="javascript:void(0);">
@@ -145,6 +140,12 @@
             a.innerHTML = '未登录';
             remarks.innerHTML = '点击登录';
             buttom.innerHTML = '点击登录';
+            a=document.getElementById ("companyName");
+            a.innerHTML = '公司名称';
+            a=document.getElementById ("companyCode");
+            a.innerHTML = '公司信用识别代码';
+            a=document.getElementById ("telphone");
+            a.innerHTML = '联系方式';
             idLogin = false;
         } else {
             a.innerHTML = userInfo.userName;

@@ -4857,7 +4857,7 @@ body {
 	line-height: 44px;
 }
 .m_header_close, .m_header_refresh, .m_input, .m_reset_btn {
-	background: url("http://s.yytcdn.com/v2/images/app/mobile/login/ico_m_login.png") no-repeat scroll 0 0;
+	background: url("../images/ico_m_login.png") no-repeat scroll 0 0;
 	background-size: 22px 330px;
 }
 .m_header_close, .m_header_refresh {
